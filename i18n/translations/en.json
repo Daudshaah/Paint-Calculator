@@ -1,0 +1,51 @@
+{
+  "header": {
+    "title": "Paint Calculator",
+    "tagline": "Professional Paint Estimation Tool",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "page": {
+    "title": "Calculate Your Paint Needs",
+    "subtitle": "Enter your room dimensions below to get an accurate paint estimate",
+    "paintSettings": "Paint Settings",
+    "coverage": "Coverage (sq ft/gallon)",
+    "coats": "Number of Coats",
+    "pricePerGallon": "Price per Gallon ($)",
+    "rooms": "Rooms",
+    "walls": "Walls",
+    "addWall": "Add Wall",
+    "length": "Length (ft)",
+    "height": "Height (ft)",
+    "doorsWindows": "Doors & Windows",
+    "addDoor": "Door",
+    "addWindow": "Window",
+    "width": "Width (ft)",
+    "addRoom": "Add Another Room",
+    "removeRoom": "Remove Room",
+    "room": "Room",
+    "results": "Results",
+    "totalArea": "Total Area",
+    "paintNeeded": "Paint Needed",
+    "estimatedCost": "Estimated Cost",
+    "totalWalls": "Total Walls",
+    "coatsLabel": "Coats"
+  },
+  "footer": {
+    "aboutTitle": "About Paint Calculator",
+    "aboutText": "A professional tool to help you calculate the exact amount of paint needed for your painting project. Get accurate estimates for multiple rooms, walls, and surfaces.",
+    "quickLinks": "Quick Links",
+    "howToUse": "How to Use",
+    "tips": "Tips & Tricks",
+    "faq": "FAQ",
+    "contactUs": "Contact Us",
+    "getInTouch": "Get in Touch",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "24/7 Available",
+    "copyright": "© {year} Paint Calculator. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
+
