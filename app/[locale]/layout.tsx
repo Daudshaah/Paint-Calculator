@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Locale } from '@/i18n/config';
+import { Locale, locales, defaultLocale } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
 
 const geistSans = Geist({
@@ -15,11 +15,16 @@ const geistMono = Geist_Mono({
 });
 
 export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'ur' }, { locale: 'hi' }];
+  return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params;
+function isValidLocale(locale: string): locale is Locale {
+  return locales.includes(locale as Locale);
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params;
+  const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
   const t = getTranslations(locale);
   
   return {
@@ -40,9 +45,10 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: localeParam } = await params;
+  const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
   
   return (
     <html lang={locale} dir={locale === 'ur' ? 'rtl' : 'ltr'}>
