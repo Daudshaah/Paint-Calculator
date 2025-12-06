@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    let locale = defaultLocale;
+    let locale: Locale = defaultLocale;
 
     // Get the locale from Accept-Language header or use default
     const acceptLanguage = request.headers.get('accept-language');
