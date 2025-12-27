@@ -11,5 +11,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <html lang="en">
+      <body className="bg-[#f6f8fb] text-gray-900">
+        {children}
+      </body>
+    </html>
+  );
 }

@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Ruler, DollarSign, Home, Droplet, Info, Download, Share2, Save, Palette, Settings } from 'lucide-react';
 import { Locale } from '@/i18n/config';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 type UnitSystem = 'imperial' | 'metric';
 
@@ -844,118 +845,141 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
 
   const activeRoomMessages = validation.roomIssues.find((x) => x.roomId === activeRoom.id)?.messages ?? [];
 
+  const tabConfig: Record<ProjectType, { label: string; icon: React.ReactNode }> = {
+    interior: { label: 'Interior', icon: <Home size={16} /> },
+    exterior: { label: 'Exterior', icon: <Droplet size={16} /> },
+    ceiling: { label: 'Ceiling', icon: <Palette size={16} /> },
+    trim: { label: 'Trim', icon: <Settings size={16} /> },
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 print:bg-white print:p-0">
       <div className="max-w-7xl mx-auto print:max-w-none">
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 print:shadow-none print:rounded-none print:p-0">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="bg-blue-600 p-3 rounded-lg print:hidden">
-                <Droplet className="text-white" size={32} />
+        <div className="mb-6 print:hidden">
+          <div className="rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-hidden">
+            <div className="flex flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg flex items-center justify-center">
+                  <Palette className="text-white" size={26} />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-blue-600">Paint Calculator</p>
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Plan, save, and share your project</h1>
+                  <p className="text-sm text-gray-600">One streamlined header for language, actions, and mode tabs.</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Professional Paint Calculator</h1>
-                <p className="text-gray-600">Calculate paint, primer, cost & time for any project</p>
+
+              <div className="flex flex-col gap-3 w-full lg:w-auto">
+                <div className="flex flex-wrap items-center justify-end gap-3">
+                  <LanguageSwitcher />
+                  <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border border-blue-100 rounded-xl shadow-inner">
+                    <select
+                      value={selectedSavedId}
+                      onChange={(e) => setSelectedSavedId(e.target.value)}
+                      className="px-3 py-2 rounded-lg bg-white border border-blue-200 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="">Load saved...</option>
+                      {savedProjects
+                        .slice()
+                        .sort((a, b) => b.savedAt - a.savedAt)
+                        .map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name}
+                          </option>
+                        ))}
+                    </select>
+                    <button
+                      onClick={() => {
+                        const found = savedProjects.find((p) => p.id === selectedSavedId);
+                        if (!found) return;
+                        setProject(found.project);
+                        setActiveRoomId(found.project.rooms[0]?.id ?? null);
+                        showToast('Project loaded');
+                      }}
+                      disabled={!selectedSavedId}
+                      className="px-3 py-2 rounded-lg bg-white text-blue-700 border border-blue-200 shadow-sm hover:bg-blue-600 hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Load
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (!selectedSavedId) return;
+                        const next = savedProjects.filter((p) => p.id !== selectedSavedId);
+                        persistSavedProjects(next);
+                        setSelectedSavedId('');
+                        showToast('Deleted');
+                      }}
+                      disabled={!selectedSavedId}
+                      className="px-3 py-2 rounded-lg bg-white text-red-600 border border-red-200 shadow-sm hover:bg-red-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                      title="Delete saved project"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-end gap-2">
+                  <button
+                    onClick={handleSave}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
+                  >
+                    <Save size={18} />
+                    Save
+                  </button>
+                  <button
+                    onClick={handleExportPdf}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-800 shadow-sm hover:border-gray-300 transition"
+                  >
+                    <Download size={18} />
+                    PDF
+                  </button>
+                  <button
+                    onClick={handleShare}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 shadow-sm hover:bg-indigo-100 transition"
+                  >
+                    <Share2 size={18} />
+                    Share
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 print:hidden">
-              <div className="flex items-center gap-2">
-                <select
-                  value={selectedSavedId}
-                  onChange={(e) => setSelectedSavedId(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg"
-                >
-                  <option value="">Load saved…</option>
-                  {savedProjects
-                    .slice()
-                    .sort((a, b) => b.savedAt - a.savedAt)
-                    .map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name}
-                      </option>
-                    ))}
-                </select>
-                <button
-                  onClick={() => {
-                    const found = savedProjects.find((p) => p.id === selectedSavedId);
-                    if (!found) return;
-                    setProject(found.project);
-                    setActiveRoomId(found.project.rooms[0]?.id ?? null);
-                    showToast('Project loaded');
-                  }}
-                  disabled={!selectedSavedId}
-                  className="px-3 py-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Load
-                </button>
-                <button
-                  onClick={() => {
-                    if (!selectedSavedId) return;
-                    const next = savedProjects.filter((p) => p.id !== selectedSavedId);
-                    persistSavedProjects(next);
-                    setSelectedSavedId('');
-                    showToast('Deleted');
-                  }}
-                  disabled={!selectedSavedId}
-                  className="px-3 py-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                  title="Delete saved project"
-                >
-                  Delete
-                </button>
-              </div>
-              <button
-                onClick={handleSave}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-              >
-                <Save size={18} />
-                Save
-              </button>
-              <button
-                onClick={handleExportPdf}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-              >
-                <Download size={18} />
-                PDF
-              </button>
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-              >
-                <Share2 size={18} />
-                Share
-              </button>
+            <div className="flex flex-wrap items-center gap-2 px-4 pb-4 pt-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-t border-blue-100">
+              {Object.entries(tabConfig).map(([tabKey, config]) => {
+                const tab = tabKey as ProjectType;
+                return (
+                  <button
+                    key={tab}
+                    onClick={() =>
+                      setProject((prev) => ({
+                        ...prev,
+                        activeTab: tab,
+                        paintDetails: {
+                          ...prev.paintDetails,
+                          paintType: tab === 'exterior' ? 'exterior' : prev.paintDetails.paintType,
+                        },
+                        rooms: prev.rooms.map((r) => ({ ...r, surfaces: defaultSurfacesByTab[tab] })),
+                      }))
+                    }
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold capitalize transition ${
+                      project.activeTab === tab
+                        ? 'bg-white text-blue-700 shadow-sm border border-blue-200'
+                        : 'text-gray-600 hover:text-blue-700 hover:bg-white'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      {config.icon}
+                      <span>{config.label}</span>
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-          </div>
-
-          <div className="flex gap-2 border-b mt-4 print:hidden">
-            {(['interior', 'exterior', 'ceiling', 'trim'] as ProjectType[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() =>
-                  setProject((prev) => ({
-                    ...prev,
-                    activeTab: tab,
-                    paintDetails: {
-                      ...prev.paintDetails,
-                      paintType: tab === 'exterior' ? 'exterior' : prev.paintDetails.paintType,
-                    },
-                    rooms: prev.rooms.map((r) => ({ ...r, surfaces: defaultSurfacesByTab[tab] })),
-                  }))
-                }
-                className={`px-6 py-3 font-medium capitalize transition ${
-                  project.activeTab === tab ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
           </div>
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6 print:hidden">
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Home size={20} className="text-blue-600" />
                 Rooms
@@ -1005,7 +1029,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Settings size={20} className="text-blue-600" />
                 Measurement System
@@ -1031,7 +1055,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               <div className="text-xs text-gray-600 mt-2">All existing inputs auto-convert when you toggle units.</div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Ruler size={20} className="text-blue-600" />
                 Measurements (Active Room)
@@ -1420,7 +1444,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Home size={20} className="text-blue-600" />
                 Surfaces to Paint (Active Room)
@@ -1442,7 +1466,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Palette size={20} className="text-blue-600" />
                 Paint Settings (Project)
@@ -1600,7 +1624,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <DollarSign size={20} className="text-blue-600" />
                 Cost Estimation (Project)
@@ -1710,7 +1734,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Info size={20} className="text-blue-600" />
                 Special Situations (Active Room)
@@ -1858,24 +1882,24 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             <div className="bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:bg-white print:text-black print:border">
               <h3 className="text-xl font-bold mb-4">Project Summary (All Rooms)</h3>
               <div className="space-y-4">
-                <div className="bg-white bg-opacity-20 rounded-lg p-4 print:bg-transparent print:p-0">
-                  <div className="text-sm opacity-90 mb-1 print:opacity-100">Total area to paint</div>
-                  <div className="text-3xl font-bold">
+                <div className="bg-white/95 text-gray-900 rounded-xl p-4 shadow-sm print:bg-transparent print:p-0">
+                  <div className="text-sm text-gray-800 mb-1 print:text-black">Total area to paint</div>
+                  <div className="text-3xl font-bold text-gray-900">
                     {formatArea(totals.totalArea)} {unitText.area}
                   </div>
                 </div>
-                <div className="bg-white bg-opacity-20 rounded-lg p-4 print:bg-transparent print:p-0">
-                  <div className="text-sm opacity-90 mb-1 print:opacity-100">Estimated time</div>
-                  <div className="text-3xl font-bold">{totals.timeEstimate} hours</div>
+                <div className="bg-white/95 text-gray-900 rounded-xl p-4 shadow-sm print:bg-transparent print:p-0">
+                  <div className="text-sm text-gray-800 mb-1 print:text-black">Estimated time</div>
+                  <div className="text-3xl font-bold text-gray-900">{totals.timeEstimate} hours</div>
                 </div>
-                <div className="bg-white bg-opacity-20 rounded-lg p-4 print:bg-transparent print:p-0">
-                  <div className="text-sm opacity-90 mb-1 print:opacity-100">Total project cost</div>
-                  <div className="text-3xl font-bold">${totals.totalCost}</div>
+                <div className="bg-white/95 text-gray-900 rounded-xl p-4 shadow-sm print:bg-transparent print:p-0">
+                  <div className="text-sm text-gray-800 mb-1 print:text-black">Total project cost</div>
+                  <div className="text-3xl font-bold text-gray-900">${totals.totalCost}</div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:border">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
               <h3 className="text-lg font-semibold mb-4">Paint Required</h3>
               <div className="space-y-3">
                 {any.walls && (
@@ -1934,7 +1958,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:border">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
               <h3 className="text-lg font-semibold mb-4">Cost Breakdown</h3>
               <div className="space-y-2">
                 <div className="text-xs text-gray-500">Paint by surface</div>
@@ -2000,7 +2024,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:border">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
               <h3 className="text-lg font-semibold mb-4">Shopping List</h3>
               <div className="space-y-2 text-sm">
                 {any.walls && (
@@ -2072,7 +2096,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </button>
             </div>
 
-            <details className="bg-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:border">
+            <details className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
               <summary className="cursor-pointer font-semibold">Room-by-room breakdown</summary>
               <div className="mt-4 space-y-3">
                 {computedRooms.map((r) => (
@@ -2107,7 +2131,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </div>
 
-            <details className="bg-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:border">
+            <details className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
               <summary className="cursor-pointer font-semibold">Surface Condition Guide</summary>
               <div className="mt-4 text-sm text-gray-700 space-y-3">
                 <div>
@@ -2129,7 +2153,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
             </details>
 
-            <details className="bg-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:border">
+            <details className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
               <summary className="cursor-pointer font-semibold">Paint Coverage Info</summary>
               <div className="mt-4 text-sm text-gray-700 space-y-2">
                 <div><span className="font-semibold">Typical coverage</span>: many paints cover ~350–450 sq ft/gal (≈ 32–42 sq m/gal) per coat.</div>
