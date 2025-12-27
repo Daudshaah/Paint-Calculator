@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Paint Calculator logo">
+  <defs>
+    <linearGradient id="g" x1="96" y1="64" x2="416" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5EB0FF" />
+      <stop offset="1" stop-color="#7C4BFF" />
+    </linearGradient>
+  </defs>
+  <rect x="32" y="32" width="448" height="448" rx="120" fill="url(#g)" />
+  <path d="M280 128c-97 0-168 60.6-168 143.4C112 343 173 384 236 384h24c19.5 0 34-13.8 34-30.9 0-17.1-14.5-30.9-34-30.9h-26.5c-17.8 0-32.5-13.4-32.5-30s14.7-30 32.5-30H304c56 0 96-36.8 96-82.2 0-50.3-50.9-82-120-82z" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="200" cy="220" r="16" fill="#fff" />
+  <circle cx="252" cy="200" r="16" fill="#fff" />
+  <circle cx="304" cy="220" r="16" fill="#fff" />
+  <circle cx="332" cy="260" r="16" fill="#fff" />
+  <circle cx="212" cy="270" r="16" fill="#fff" />
+</svg>

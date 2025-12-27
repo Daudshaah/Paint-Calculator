@@ -29,6 +29,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: `${t.header.title} - ${t.header.tagline}`,
     description: t.footer.aboutText,
+    icons: {
+      icon: '/icon.svg',
+      shortcut: '/icon.svg',
+      apple: '/icon.svg',
+    },
     alternates: {
       languages: {
         'en': '/en',
@@ -60,4 +65,3 @@ export default async function LocaleLayout({
     </html>
   );
 }
-
