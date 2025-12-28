@@ -856,7 +856,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 print:bg-white print:p-0">
       <div className="max-w-7xl mx-auto print:max-w-none">
         <div className="mb-6 print:hidden">
-          <div className="rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-hidden">
+          <div className="relative rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-visible">
             <div className="flex flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg flex items-center justify-center">
