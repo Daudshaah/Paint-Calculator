@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "Farbkalkulator",
+    "tagline": "Professionelles Werkzeug zur Farbschätzung",
+    "home": "Start",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "page": {
+    "title": "Berechnen Sie Ihren Farbbedarf",
+    "subtitle": "Geben Sie die Raummaße ein, um eine genaue Schätzung zu erhalten",
+    "paintSettings": "Farbeinstellungen",
+    "coverage": "Deckkraft (ft\u00b2/gal)",
+    "coats": "Anstriche",
+    "pricePerGallon": "Preis pro Gallone ($)",
+    "rooms": "R\u00e4ume",
+    "walls": "W\u00e4nde",
+    "addWall": "Wand hinzuf\u00fcgen",
+    "length": "L\u00e4nge (ft)",
+    "height": "H\u00f6he (ft)",
+    "doorsWindows": "T\u00fcren und Fenster",
+    "addDoor": "T\u00fcr",
+    "addWindow": "Fenster",
+    "width": "Breite (ft)",
+    "addRoom": "Raum hinzuf\u00fcgen",
+    "removeRoom": "Raum entfernen",
+    "room": "Raum",
+    "results": "Ergebnisse",
+    "totalArea": "Gesamtfl\u00e4che",
+    "paintNeeded": "Ben\u00f6tigte Farbe",
+    "estimatedCost": "Gesch\u00e4tzte Kosten",
+    "totalWalls": "W\u00e4nde gesamt",
+    "coatsLabel": "Anstriche"
+  },
+  "footer": {
+    "aboutTitle": "Über den Farbkalkulator",
+    "aboutText": "Ein professionelles Tool, um die exakt ben\u00f6tigte Farbmenge zu berechnen. Erhalten Sie genaue Sch\u00e4tzungen f\u00fcr mehrere R\u00e4ume, W\u00e4nde und Oberfl\u00e4chen.",
+    "quickLinks": "Schnelllinks",
+    "howToUse": "Anleitung",
+    "tips": "Tipps & Tricks",
+    "faq": "FAQ",
+    "contactUs": "Kontakt",
+    "getInTouch": "Nehmen Sie Kontakt auf",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "24/7 verf\u00fcgbar",
+    "copyright": "\u00a9 {year} Farbkalkulator. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzerkl\u00e4rung",
+    "terms": "Nutzungsbedingungen"
+  }
+}

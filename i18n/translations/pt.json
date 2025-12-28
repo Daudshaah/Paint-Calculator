@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "Calculadora de Tinta",
+    "tagline": "Ferramenta profissional de estimativa de pintura",
+    "home": "Início",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "page": {
+    "title": "Calcule sua necessidade de tinta",
+    "subtitle": "Insira as dimensões do cômodo para obter uma estimativa precisa",
+    "paintSettings": "Configurações de tinta",
+    "coverage": "Cobertura (ft\u00b2/gal)",
+    "coats": "Dem\u00e3os",
+    "pricePerGallon": "Preço por gal\u00e3o ($)",
+    "rooms": "C\u00f4modos",
+    "walls": "Paredes",
+    "addWall": "Adicionar parede",
+    "length": "Comprimento (ft)",
+    "height": "Altura (ft)",
+    "doorsWindows": "Portas e janelas",
+    "addDoor": "Porta",
+    "addWindow": "Janela",
+    "width": "Largura (ft)",
+    "addRoom": "Adicionar c\u00f4modo",
+    "removeRoom": "Remover c\u00f4modo",
+    "room": "C\u00f4modo",
+    "results": "Resultados",
+    "totalArea": "\u00c1rea total",
+    "paintNeeded": "Tinta necess\u00e1ria",
+    "estimatedCost": "Custo estimado",
+    "totalWalls": "Total de paredes",
+    "coatsLabel": "Dem\u00e3os"
+  },
+  "footer": {
+    "aboutTitle": "Sobre a Calculadora de Tinta",
+    "aboutText": "Uma ferramenta profissional para calcular a quantidade exata de tinta necess\u00e1ria. Obtenha estimativas precisas para v\u00e1rios c\u00f4modos, paredes e superf\u00edcies.",
+    "quickLinks": "Links r\u00e1pidos",
+    "howToUse": "Como usar",
+    "tips": "Dicas e truques",
+    "faq": "Perguntas frequentes",
+    "contactUs": "Fale conosco",
+    "getInTouch": "Entre em contato",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "Dispon\u00edvel 24/7",
+    "copyright": "\u00a9 {year} Calculadora de Tinta. Todos os direitos reservados.",
+    "privacy": "Pol\u00edtica de privacidade",
+    "terms": "Termos de servi\u00e7o"
+  }
+}

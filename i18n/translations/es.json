@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "Calculadora de Pintura",
+    "tagline": "Herramienta profesional de estimación de pintura",
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "page": {
+    "title": "Calcula tus necesidades de pintura",
+    "subtitle": "Ingresa las dimensiones de la habitación para obtener un estimado preciso",
+    "paintSettings": "Ajustes de pintura",
+    "coverage": "Cobertura (ft\u00b2/gal)",
+    "coats": "Capas",
+    "pricePerGallon": "Precio por galón ($)",
+    "rooms": "Habitaciones",
+    "walls": "Paredes",
+    "addWall": "Agregar pared",
+    "length": "Largo (ft)",
+    "height": "Alto (ft)",
+    "doorsWindows": "Puertas y ventanas",
+    "addDoor": "Puerta",
+    "addWindow": "Ventana",
+    "width": "Ancho (ft)",
+    "addRoom": "Agregar habitación",
+    "removeRoom": "Eliminar habitación",
+    "room": "Habitación",
+    "results": "Resultados",
+    "totalArea": "Área total",
+    "paintNeeded": "Pintura necesaria",
+    "estimatedCost": "Costo estimado",
+    "totalWalls": "Paredes totales",
+    "coatsLabel": "Capas"
+  },
+  "footer": {
+    "aboutTitle": "Acerca de Calculadora de Pintura",
+    "aboutText": "Una herramienta profesional para calcular la cantidad exacta de pintura necesaria. Obtén estimaciones precisas para varias habitaciones, paredes y superficies.",
+    "quickLinks": "Accesos rápidos",
+    "howToUse": "Cómo usar",
+    "tips": "Consejos y trucos",
+    "faq": "Preguntas frecuentes",
+    "contactUs": "Contáctanos",
+    "getInTouch": "Ponte en contacto",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "Disponible 24/7",
+    "copyright": "© {year} Calculadora de Pintura. Todos los derechos reservados.",
+    "privacy": "Política de privacidad",
+    "terms": "Términos del servicio"
+  }
+}

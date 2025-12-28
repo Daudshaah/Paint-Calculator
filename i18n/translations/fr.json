@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "Calculateur de peinture",
+    "tagline": "Outil professionnel d'estimation de peinture",
+    "home": "Accueil",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "page": {
+    "title": "Calculez vos besoins en peinture",
+    "subtitle": "Saisissez les dimensions de la pièce pour obtenir une estimation précise",
+    "paintSettings": "Paramètres de peinture",
+    "coverage": "Couverture (ft\u00b2/gal)",
+    "coats": "Couches",
+    "pricePerGallon": "Prix par gallon ($)",
+    "rooms": "Pi\u00e8ces",
+    "walls": "Murs",
+    "addWall": "Ajouter un mur",
+    "length": "Longueur (ft)",
+    "height": "Hauteur (ft)",
+    "doorsWindows": "Portes et fen\u00eatres",
+    "addDoor": "Porte",
+    "addWindow": "Fen\u00eatre",
+    "width": "Largeur (ft)",
+    "addRoom": "Ajouter une pi\u00e8ce",
+    "removeRoom": "Supprimer la pi\u00e8ce",
+    "room": "Pi\u00e8ce",
+    "results": "R\u00e9sultats",
+    "totalArea": "Superficie totale",
+    "paintNeeded": "Peinture n\u00e9cessaire",
+    "estimatedCost": "Co\u00fbt estim\u00e9",
+    "totalWalls": "Murs totaux",
+    "coatsLabel": "Couches"
+  },
+  "footer": {
+    "aboutTitle": "À propos du Calculateur de peinture",
+    "aboutText": "Un outil professionnel pour calculer la quantit\u00e9 exacte de peinture n\u00e9cessaire. Obtenez des estimations pr\u00e9cises pour plusieurs pi\u00e8ces, murs et surfaces.",
+    "quickLinks": "Liens rapides",
+    "howToUse": "Comment utiliser",
+    "tips": "Astuces et conseils",
+    "faq": "FAQ",
+    "contactUs": "Contactez-nous",
+    "getInTouch": "Entrer en contact",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "Disponible 24/7",
+    "copyright": "\u00a9 {year} Calculateur de peinture. Tous droits r\u00e9serv\u00e9s.",
+    "privacy": "Politique de confidentialit\u00e9",
+    "terms": "Conditions d'utilisation"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "Calcolatrice di Pittura",
+    "tagline": "Strumento professionale di stima della pittura",
+    "home": "Home",
+    "about": "Chi siamo",
+    "contact": "Contatto"
+  },
+  "page": {
+    "title": "Calcola il tuo fabbisogno di pittura",
+    "subtitle": "Inserisci le dimensioni della stanza per ottenere una stima accurata",
+    "paintSettings": "Impostazioni della pittura",
+    "coverage": "Copertura (ft\u00b2/gal)",
+    "coats": "Mani",
+    "pricePerGallon": "Prezzo per gallone ($)",
+    "rooms": "Stanze",
+    "walls": "Pareti",
+    "addWall": "Aggiungi parete",
+    "length": "Lunghezza (ft)",
+    "height": "Altezza (ft)",
+    "doorsWindows": "Porte e finestre",
+    "addDoor": "Porta",
+    "addWindow": "Finestra",
+    "width": "Larghezza (ft)",
+    "addRoom": "Aggiungi stanza",
+    "removeRoom": "Rimuovi stanza",
+    "room": "Stanza",
+    "results": "Risultati",
+    "totalArea": "Area totale",
+    "paintNeeded": "Pittura necessaria",
+    "estimatedCost": "Costo stimato",
+    "totalWalls": "Pareti totali",
+    "coatsLabel": "Mani"
+  },
+  "footer": {
+    "aboutTitle": "Informazioni su Calcolatrice di Pittura",
+    "aboutText": "Uno strumento professionale per calcolare la quantità esatta di pittura necessaria. Ottieni stime precise per più stanze, pareti e superfici.",
+    "quickLinks": "Link rapidi",
+    "howToUse": "Come usare",
+    "tips": "Suggerimenti e trucchi",
+    "faq": "FAQ",
+    "contactUs": "Contattaci",
+    "getInTouch": "Mettiti in contatto",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "Disponibile 24/7",
+    "copyright": "\u00a9 {year} Calcolatrice di Pittura. Tutti i diritti riservati.",
+    "privacy": "Informativa sulla privacy",
+    "terms": "Termini di servizio"
+  }
+}

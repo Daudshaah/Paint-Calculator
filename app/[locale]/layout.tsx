@@ -36,9 +36,31 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     alternates: {
       languages: {
+        'x-default': '/en',
         'en': '/en',
-        'ur': '/ur',
-        'hi': '/hi',
+        'en-US': '/en',
+        'en-GB': '/en',
+        'en-CA': '/en',
+        'en-AU': '/en',
+        'es': '/es',
+        'es-US': '/es',
+        'es-MX': '/es',
+        'es-ES': '/es',
+        'es-419': '/es',
+        'pt': '/pt',
+        'pt-BR': '/pt',
+        'fr': '/fr',
+        'fr-FR': '/fr',
+        'fr-CA': '/fr',
+        'de': '/de',
+        'de-DE': '/de',
+        'de-AT': '/de',
+        'de-CH': '/de',
+        'it': '/it',
+        'it-IT': '/it',
+        'nl': '/nl',
+        'nl-NL': '/nl',
+        'nl-BE': '/nl',
       },
     },
   };
@@ -55,7 +77,7 @@ export default async function LocaleLayout({
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
   
   return (
-    <html lang={locale} dir={locale === 'ur' ? 'rtl' : 'ltr'}>
+    <html lang={locale} dir="ltr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

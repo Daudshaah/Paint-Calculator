@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "Verfcalculator",
+    "tagline": "Professioneel hulpmiddel voor verfschatting",
+    "home": "Home",
+    "about": "Over",
+    "contact": "Contact"
+  },
+  "page": {
+    "title": "Bereken je verfbehoefte",
+    "subtitle": "Voer de afmetingen van de kamer in voor een nauwkeurige schatting",
+    "paintSettings": "Verfinstellingen",
+    "coverage": "Dekking (ft\u00b2/gal)",
+    "coats": "Lagen",
+    "pricePerGallon": "Prijs per gallon ($)",
+    "rooms": "Kamers",
+    "walls": "Muren",
+    "addWall": "Muur toevoegen",
+    "length": "Lengte (ft)",
+    "height": "Hoogte (ft)",
+    "doorsWindows": "Deuren en ramen",
+    "addDoor": "Deur",
+    "addWindow": "Raam",
+    "width": "Breedte (ft)",
+    "addRoom": "Kamer toevoegen",
+    "removeRoom": "Kamer verwijderen",
+    "room": "Kamer",
+    "results": "Resultaten",
+    "totalArea": "Totale oppervlakte",
+    "paintNeeded": "Benodigde verf",
+    "estimatedCost": "Geschatte kosten",
+    "totalWalls": "Totaal aantal muren",
+    "coatsLabel": "Lagen"
+  },
+  "footer": {
+    "aboutTitle": "Over Verfcalculator",
+    "aboutText": "Een professioneel hulpmiddel om de exacte hoeveelheid benodigde verf te berekenen. Krijg nauwkeurige schattingen voor meerdere kamers, muren en oppervlakken.",
+    "quickLinks": "Snelle links",
+    "howToUse": "Hoe te gebruiken",
+    "tips": "Tips en trucs",
+    "faq": "FAQ",
+    "contactUs": "Neem contact op",
+    "getInTouch": "Kom in contact",
+    "supportEmail": "support@paintcalculator.com",
+    "available": "24/7 beschikbaar",
+    "copyright": "\u00a9 {year} Verfcalculator. Alle rechten voorbehouden.",
+    "privacy": "Privacybeleid",
+    "terms": "Servicevoorwaarden"
+  }
+}
