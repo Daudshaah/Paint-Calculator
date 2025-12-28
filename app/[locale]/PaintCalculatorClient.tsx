@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Ruler, DollarSign, Home, Droplet, Info, Download, Share2, Save, Palette, Settings } from 'lucide-react';
 import { Locale } from '@/i18n/config';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { getTranslations } from '@/i18n';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
 type UnitSystem = 'imperial' | 'metric';
@@ -164,6 +165,8 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const t = useMemo(() => getTranslations(_locale), [_locale]);
+  const ui = t.ui;
 
   const defaultSurfacesByTab: Record<ProjectType, Surfaces> = {
     interior: { walls: true, ceiling: false, trim: false, doors: false },
@@ -175,7 +178,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   const createDefaultRoom = (unit: UnitSystem, tab: ProjectType): RoomState => ({
     id: uid('room'),
     measurements: {
-      name: 'Room 1',
+      name: `${ui.room} 1`,
       mode: 'dimensions',
       length: '',
       width: '',
@@ -719,9 +722,9 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
           const hei = parseFloat(m.height) || 0;
           const needsDims = r.surfaces.walls || r.surfaces.ceiling || r.surfaces.trim || r.extras.wainscoting;
           if (needsDims) {
-            if (len <= 0) msgs.push('Enter a positive length.');
-            if (wid <= 0) msgs.push('Enter a positive width.');
-            if (hei <= 0) msgs.push('Enter a positive height.');
+            if (len <= 0) msgs.push(ui.errorLength);
+            if (wid <= 0) msgs.push(ui.errorWidth);
+            if (hei <= 0) msgs.push(ui.errorHeight);
           }
         } else {
           const wallArea = parseFloat(m.directWallArea) || 0;
@@ -782,7 +785,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     setProject((prev) => {
       const nextIndex = prev.rooms.length + 1;
       const room = createDefaultRoom(prev.unit, prev.activeTab);
-      room.measurements.name = `Room ${nextIndex}`;
+      room.measurements.name = `${ui.room} ${nextIndex}`;
       return { ...prev, rooms: [...prev.rooms, room] };
     });
   };
@@ -846,10 +849,10 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   const activeRoomMessages = validation.roomIssues.find((x) => x.roomId === activeRoom.id)?.messages ?? [];
 
   const tabConfig: Record<ProjectType, { label: string; icon: React.ReactNode }> = {
-    interior: { label: 'Interior', icon: <Home size={16} /> },
-    exterior: { label: 'Exterior', icon: <Droplet size={16} /> },
-    ceiling: { label: 'Ceiling', icon: <Palette size={16} /> },
-    trim: { label: 'Trim', icon: <Settings size={16} /> },
+    interior: { label: ui.tabs.interior, icon: <Home size={16} /> },
+    exterior: { label: ui.tabs.exterior, icon: <Droplet size={16} /> },
+    ceiling: { label: ui.tabs.ceiling, icon: <Palette size={16} /> },
+    trim: { label: ui.tabs.trim, icon: <Settings size={16} /> },
   };
 
   return (
@@ -864,21 +867,21 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 </div>
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-blue-600">Paint Calculator</p>
-                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Plan, save, and share your project</h1>
-                  <p className="text-sm text-gray-600">One streamlined header for language, actions, and mode tabs.</p>
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{ui.heroTitle}</h1>
+                  <p className="text-sm text-gray-600">{ui.heroSubtitle}</p>
                 </div>
               </div>
 
               <div className="flex flex-col gap-3 w-full lg:w-auto">
                 <div className="flex flex-wrap items-center justify-end gap-3">
-                  <LanguageSwitcher />
+                  <LanguageSwitcher label={ui.languages} />
                   <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border border-blue-100 rounded-xl shadow-inner">
                     <select
                       value={selectedSavedId}
                       onChange={(e) => setSelectedSavedId(e.target.value)}
                       className="px-3 py-2 rounded-lg bg-white border border-blue-200 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      <option value="">Load saved...</option>
+                      <option value="">{ui.loadSaved}</option>
                       {savedProjects
                         .slice()
                         .sort((a, b) => b.savedAt - a.savedAt)
@@ -899,7 +902,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       disabled={!selectedSavedId}
                       className="px-3 py-2 rounded-lg bg-white text-blue-700 border border-blue-200 shadow-sm hover:bg-blue-600 hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Load
+                      {ui.load}
                     </button>
                     <button
                       onClick={() => {
@@ -913,7 +916,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       className="px-3 py-2 rounded-lg bg-white text-red-600 border border-red-200 shadow-sm hover:bg-red-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
                       title="Delete saved project"
                     >
-                      Delete
+                      {ui.delete}
                     </button>
                   </div>
                 </div>
@@ -924,21 +927,21 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
                   >
                     <Save size={18} />
-                    Save
+                    {ui.save}
                   </button>
                   <button
                     onClick={handleExportPdf}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-800 shadow-sm hover:border-gray-300 transition"
                   >
                     <Download size={18} />
-                    PDF
+                    {ui.pdf}
                   </button>
                   <button
                     onClick={handleShare}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 shadow-sm hover:bg-indigo-100 transition"
                   >
                     <Share2 size={18} />
-                    Share
+                    {ui.share}
                   </button>
                 </div>
               </div>
@@ -982,7 +985,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Home size={20} className="text-blue-600" />
-                Rooms
+                {ui.rooms}
               </h3>
 
               <div className="flex flex-wrap gap-2 mb-4">
@@ -994,27 +997,27 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       r.id === activeRoom.id ? 'bg-blue-600 text-white border-blue-600' : 'bg-white hover:bg-gray-50'
                     }`}
                   >
-                    {r.measurements.name || 'Room'}
+                    {r.measurements.name || ui.room}
                   </button>
                 ))}
                 <button
                   onClick={addRoom}
                   className="px-3 py-2 rounded-lg border border-dashed text-sm hover:bg-gray-50 transition"
                 >
-                  + Add room
+                  {ui.addRoom}
                 </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Room name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.room}</label>
                   <input
                     value={activeRoom.measurements.name}
                     onChange={(e) =>
                       updateRoom(activeRoom.id, (r) => ({ ...r, measurements: { ...r.measurements, name: e.target.value } }))
                     }
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="e.g. Living Room"
+                    placeholder={`${ui.room} 1`}
                   />
                 </div>
                 <div className="flex gap-2 md:justify-end">
@@ -1023,7 +1026,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     disabled={project.rooms.length <= 1}
                     className="px-4 py-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Remove
+                    {ui.remove}
                   </button>
                 </div>
               </div>
@@ -1032,7 +1035,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Settings size={20} className="text-blue-600" />
-                Measurement System
+                {ui.measurementSystem}
               </h3>
               <div className="flex gap-4">
                 <button
@@ -1041,7 +1044,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     project.unit === 'imperial' ? 'bg-blue-600 text-white' : 'bg-gray-100 hover:bg-gray-200'
                   }`}
                 >
-                  Feet / Inches
+                  {ui.imperial}
                 </button>
                 <button
                   onClick={() => setProject((prev) => convertProjectUnits(prev, 'metric'))}
@@ -1049,21 +1052,21 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     project.unit === 'metric' ? 'bg-blue-600 text-white' : 'bg-gray-100 hover:bg-gray-200'
                   }`}
                 >
-                  Meters / CM
+                  {ui.metric}
                 </button>
               </div>
-              <div className="text-xs text-gray-600 mt-2">All existing inputs auto-convert when you toggle units.</div>
+              <div className="text-xs text-gray-600 mt-2">{ui.measurementHint}</div>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Ruler size={20} className="text-blue-600" />
-                Measurements (Active Room)
+                {ui.measurementsTitle}
               </h3>
 
               {(validation.projectIssues.length > 0 || activeRoomMessages.length > 0) && (
                 <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
-                  <div className="font-semibold mb-1">Please fix these to ensure accurate results:</div>
+                  <div className="font-semibold mb-1">{ui.errorsTitle}</div>
                   <ul className="list-disc pl-5 space-y-1">
                     {validation.projectIssues.map((m) => (
                       <li key={m}>{m}</li>
@@ -1084,7 +1087,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     activeRoom.measurements.mode === 'dimensions' ? 'bg-blue-600 text-white border-blue-600' : 'hover:bg-gray-50'
                   }`}
                 >
-                  Use length/width/height
+                  {ui.useDimensions}
                 </button>
                 <button
                   onClick={() =>
@@ -1096,14 +1099,14 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       : 'hover:bg-gray-50'
                   }`}
                 >
-                  Enter wall area directly (irregular rooms)
+                  {ui.useDirect}
                 </button>
               </div>
 
               {activeRoom.measurements.mode === 'dimensions' ? (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Length ({unitText.length})</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{`${ui.length} (${unitText.length})`}</label>
                     <input
                       type="number"
                       value={activeRoom.measurements.length}
@@ -1116,7 +1119,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Width ({unitText.length})</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{`${ui.width} (${unitText.length})`}</label>
                     <input
                       type="number"
                       value={activeRoom.measurements.width}
@@ -1129,7 +1132,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Height ({unitText.length})</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{`${ui.height} (${unitText.length})`}</label>
                     <input
                       type="number"
                       value={activeRoom.measurements.height}

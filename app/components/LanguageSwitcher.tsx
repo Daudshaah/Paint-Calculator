@@ -4,7 +4,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config';
 
-export default function LanguageSwitcher() {
+type LanguageSwitcherProps = {
+  label?: string;
+};
+
+export default function LanguageSwitcher({ label = 'Languages' }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -43,7 +47,7 @@ export default function LanguageSwitcher() {
       >
         <span className="text-lg" aria-hidden="true">{localeFlags[currentLocale]}</span>
         <div className="flex flex-col items-start leading-tight">
-          <span className="text-xs uppercase tracking-wide text-gray-500">Languages</span>
+          <span className="text-xs uppercase tracking-wide text-gray-500">{label}</span>
           <span>{localeNames[currentLocale]}</span>
         </div>
         <svg
