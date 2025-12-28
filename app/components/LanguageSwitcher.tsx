@@ -65,7 +65,7 @@ export default function LanguageSwitcher() {
         <div
           id={menuId}
           role="listbox"
-          className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50 overflow-hidden max-h-80 overflow-y-auto"
+          className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-[70vh] overflow-y-auto"
         >
           {locales.map((locale) => (
             <button
