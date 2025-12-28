@@ -9,9 +9,10 @@ export default function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+  const menuId = 'language-menu';
 
   // Extract current locale from pathname
-  const currentLocale = pathname.split('/')[1] as Locale || 'en';
+  const currentLocale = (locales.includes(pathname.split('/')[1] as Locale) ? pathname.split('/')[1] : 'en') as Locale;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -34,11 +35,17 @@ export default function LanguageSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors font-medium text-gray-700 dark:text-gray-300"
+        className="flex items-center gap-3 px-4 py-2 bg-white border border-blue-100 rounded-lg shadow-sm hover:border-blue-300 hover:bg-blue-50 transition-colors font-medium text-gray-800"
         aria-label="Select language"
+        aria-expanded={isOpen}
+        aria-controls={menuId}
+        type="button"
       >
-        <span className="text-lg">{localeFlags[currentLocale]}</span>
-        <span className="hidden sm:inline">{localeNames[currentLocale]}</span>
+        <span className="text-lg" aria-hidden="true">{localeFlags[currentLocale]}</span>
+        <div className="flex flex-col items-start leading-tight">
+          <span className="text-xs uppercase tracking-wide text-gray-500">Languages</span>
+          <span>{localeNames[currentLocale]}</span>
+        </div>
         <svg
           className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -55,19 +62,26 @@ export default function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden">
+        <div
+          id={menuId}
+          role="listbox"
+          className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50 overflow-hidden max-h-80 overflow-y-auto"
+        >
           {locales.map((locale) => (
             <button
               key={locale}
               onClick={() => switchLanguage(locale)}
+              type="button"
               className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
                 currentLocale === locale
-                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                  : 'text-gray-700 dark:text-gray-300'
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-gray-800'
               }`}
+              role="option"
+              aria-selected={currentLocale === locale}
             >
-              <span className="text-xl">{localeFlags[locale]}</span>
-              <span className="font-medium">{localeNames[locale]}</span>
+              <span className="text-sm font-semibold text-gray-600">{localeFlags[locale] || locale.toUpperCase()}</span>
+              <span className="font-medium truncate">{localeNames[locale]}</span>
               {currentLocale === locale && (
                 <svg
                   className="w-4 h-4 ml-auto"
