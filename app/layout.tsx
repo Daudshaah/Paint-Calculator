@@ -9,6 +9,7 @@ const languageAlternates = locales.reduce<Record<string, string>>((acc, locale) 
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '');
 const alternateLocales = locales.filter((locale) => locale !== defaultLocale);
+const googleVerification = 'H6hfcYztHGKkycUnlH8I8RsU3LpMgMMB1fPjOZsE0UU';
 const siteJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -46,6 +47,9 @@ export const metadata: Metadata = {
     images: [`${siteUrl}/icon.svg`],
   },
   themeColor: "#0f172a",
+  verification: {
+    google: googleVerification,
+  },
 };
 
 export default function RootLayout({
@@ -57,6 +61,17 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/icon.svg" as="image" type="image/svg+xml" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFHR0YQ9N1"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-EFHR0YQ9N1');
+            `,
+          }}
+        />
       </head>
       <body className="bg-[#f6f8fb] text-gray-900">
         <script
