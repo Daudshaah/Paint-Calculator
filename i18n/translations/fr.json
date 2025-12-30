@@ -81,6 +81,7 @@
     "length": "Longueur (ft)",
     "width": "Largeur (ft)",
     "height": "Hauteur (ft)",
+    "perimeter": "Périmètre (pour plinthes)",
     "doors": "Portes",
     "windows": "Fenêtres",
     "addDoorType": "+ Ajouter un type de porte",
@@ -88,6 +89,8 @@
     "quantity": "Qté",
     "size": "Taille",
     "removeItem": "Retirer",
+    "widthSmall": "Largeur",
+    "heightSmall": "Hauteur",
     "surfacesTitle": "Surfaces à peindre (pièce active)",
     "walls": "murs",
     "ceiling": "plafond",
@@ -102,10 +105,13 @@
     "useDefault": "Utiliser par défaut",
     "unitsSqFt": "Unités : ft²/gal",
     "includePrimer": "Inclure l'apprêt",
+    "primerCoats": "Couches d'apprêt",
+    "primerCoverage": "Couverture de l'apprêt",
     "costTitle": "Estimation des coûts (projet)",
     "paintPrice": "Prix de la peinture (par gallon)",
     "primerPrice": "Prix de l'apprêt (par gallon)",
     "includeLabor": "Inclure la main-d'œuvre",
+    "laborRate": "Taux horaire de main-d'œuvre",
     "includeSupplies": "Inclure les fournitures",
     "brushes": "Pinceaux et rouleaux ($)",
     "tape": "Ruban de peintre ($)",
@@ -125,17 +131,53 @@
     "perCoatCoverage": "Par couche • Couverture : {rate} {unit}",
     "costBreakdown": "Répartition des coûts",
     "paintBySurface": "Peinture par surface",
-    "paint": "Peinture",
-    "supplies": "Fournitures",
+    "paint": "Peinture",\n    "primerLabel": "Apprêt",\n    "supplies": "Fournitures",
     "total": "Total",
     "shoppingList": "Liste de courses",
     "printShopping": "Imprimer la liste",
     "roomBreakdown": "Détail par pièce",
     "proTips": "Astuces pro",
+    "proTipsTitle": "Astuces pro",
+    "proTip1": "Achetez 10–15% de peinture en plus pour les retouches",
+    "proTip2": "Apprêtez les couleurs sombres avant de peindre clair",
+    "proTip3": "Deux couches fines > une épaisse",
+    "proTip4": "Gardez les étiquettes de peinture pour référence",
+    "proTip5": "Conditions idéales : faible humidité, 10–30°C",
     "surfaceGuide": "Guide de l'état des surfaces",
     "coverageInfo": "Informations de couverture",
+    "coverageTip": "Si vous connaissez la couverture de votre marque, indiquez-la dans « Pouvoir couvrant » pour plus de précision.",
     "modalSaveTitle": "Enregistrer le projet",
     "modalProjectName": "Nom du projet",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "conditionOptions": {
+      "new": "Neuf / Excellent (100%)",
+      "good": "Bon (110%)",
+      "fair": "Moyen - réparations nécessaires (120%)",
+      "poor": "Mauvais - grosses réparations (130%)"
+    },
+    "paintTypes": {
+      "latex": "Latex",
+      "oil": "Base solvant",
+      "enamel": "Émail",
+      "exterior": "Extérieur",
+      "ceiling": "Plafond"
+    },
+    "paintFinishes": {
+      "flat": "Mat",
+      "eggshell": "Velouté / œuf",
+      "satin": "Satiné",
+      "semigloss": "Semi-brillant",
+      "gloss": "Brillant"
+    },
+    "roomBreakdownLabels": {
+      "area": "Surface à peindre",
+      "time": "Temps",
+      "paint": "Peinture (pièce)",
+      "primer": "Apprêt (pièce)"
+    },
+    "coverageTypical": "Couverture typique : beaucoup de peintures couvrent ~350–450 ft²/gal (˜ 32–42 m²/gal) par couche.",
+    "coverageWhy": "Pourquoi ça varie : texture, porosité et changements de couleur (sombre vers clair) réduisent la couverture.",
+    "wainscotingNote": "Note : la réduction par lambris utilise le périmètre de la pièce (saisir le périmètre en mode surface directe)."
   }
 }
+

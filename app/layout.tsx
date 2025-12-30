@@ -1,7 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { locales, defaultLocale } from "@/i18n/config";
+
+const languageAlternates = locales.reduce<Record<string, string>>((acc, locale) => {
+  acc[locale] = `/${locale}`;
+  return acc;
+}, { 'x-default': `/${defaultLocale}` });
+
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '');
+const alternateLocales = locales.filter((locale) => locale !== defaultLocale);
+const siteJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Paint Calculator',
+  url: `${siteUrl}/`,
+  inLanguage: locales,
+});
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Paint Calculator - Professional Paint Estimation Tool",
   description: "Calculate the exact amount of paint needed for your painting project. Get accurate estimates for multiple rooms, walls, and surfaces.",
   icons: {
@@ -10,34 +27,25 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   alternates: {
-    languages: {
-      'x-default': '/en',
-      'en': '/en',
-      'en-US': '/en',
-      'en-GB': '/en',
-      'en-CA': '/en',
-      'en-AU': '/en',
-      'es': '/es',
-      'es-US': '/es',
-      'es-MX': '/es',
-      'es-ES': '/es',
-      'es-419': '/es',
-      'pt': '/pt',
-      'pt-BR': '/pt',
-      'fr': '/fr',
-      'fr-FR': '/fr',
-      'fr-CA': '/fr',
-      'de': '/de',
-      'de-DE': '/de',
-      'de-AT': '/de',
-      'de-CH': '/de',
-      'it': '/it',
-      'it-IT': '/it',
-      'nl': '/nl',
-      'nl-NL': '/nl',
-      'nl-BE': '/nl',
-    },
+    languages: languageAlternates,
   },
+  openGraph: {
+    title: "Paint Calculator - Professional Paint Estimation Tool",
+    description: "Calculate the exact amount of paint needed for your painting project. Get accurate estimates for multiple rooms, walls, and surfaces.",
+    url: `${siteUrl}/${defaultLocale}`,
+    siteName: "Paint Calculator",
+    locale: defaultLocale,
+    alternateLocale: alternateLocales,
+    type: "website",
+    images: [`${siteUrl}/icon.svg`],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Paint Calculator - Professional Paint Estimation Tool",
+    description: "Calculate the exact amount of paint needed for your painting project. Get accurate estimates for multiple rooms, walls, and surfaces.",
+    images: [`${siteUrl}/icon.svg`],
+  },
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({
@@ -47,7 +55,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" href="/icon.svg" as="image" type="image/svg+xml" />
+      </head>
       <body className="bg-[#f6f8fb] text-gray-900">
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: siteJsonLd }}
+        />
         {children}
       </body>
     </html>

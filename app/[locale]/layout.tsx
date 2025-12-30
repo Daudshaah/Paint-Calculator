@@ -25,8 +25,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
   const t = getTranslations(locale);
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '');
+  const languageAlternates = locales.reduce<Record<string, string>>((acc, lang) => {
+    acc[lang] = `/${lang}`;
+    return acc;
+  }, { 'x-default': `/${defaultLocale}` });
+  const alternateLocales = locales.filter((lang) => lang !== locale);
   
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
     title: `${t.header.title} - ${t.header.tagline}`,
     description: t.footer.aboutText,
     icons: {
@@ -35,34 +42,25 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       apple: '/icon.svg',
     },
     alternates: {
-      languages: {
-        'x-default': '/en',
-        'en': '/en',
-        'en-US': '/en',
-        'en-GB': '/en',
-        'en-CA': '/en',
-        'en-AU': '/en',
-        'es': '/es',
-        'es-US': '/es',
-        'es-MX': '/es',
-        'es-ES': '/es',
-        'es-419': '/es',
-        'pt': '/pt',
-        'pt-BR': '/pt',
-        'fr': '/fr',
-        'fr-FR': '/fr',
-        'fr-CA': '/fr',
-        'de': '/de',
-        'de-DE': '/de',
-        'de-AT': '/de',
-        'de-CH': '/de',
-        'it': '/it',
-        'it-IT': '/it',
-        'nl': '/nl',
-        'nl-NL': '/nl',
-        'nl-BE': '/nl',
-      },
+      languages: languageAlternates,
     },
+    openGraph: {
+      title: `${t.header.title} - ${t.header.tagline}`,
+      description: t.footer.aboutText,
+      url: `${siteUrl}/${locale}`,
+      siteName: t.header.title,
+      locale,
+      alternateLocale: alternateLocales,
+      type: 'website',
+      images: [`${siteUrl}/icon.svg`],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${t.header.title} - ${t.header.tagline}`,
+      description: t.footer.aboutText,
+      images: [`${siteUrl}/icon.svg`],
+    },
+    themeColor: '#0f172a',
   };
 }
 
@@ -75,12 +73,26 @@ export default async function LocaleLayout({
 }) {
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
+  const pageJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${locale.toUpperCase()} | Paint Calculator`,
+    inLanguage: locale,
+    url: `${(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '')}/${locale}`,
+    isPartOf: `${(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '')}/`,
+    description: getTranslations(locale).footer.aboutText,
+  });
   
   return (
     <html lang={locale} dir="ltr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: pageJsonLd }}
+        />
         {children}
         <Footer locale={locale} />
       </body>

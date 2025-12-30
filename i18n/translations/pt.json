@@ -81,6 +81,7 @@
     "length": "Comprimento (ft)",
     "width": "Largura (ft)",
     "height": "Altura (ft)",
+    "perimeter": "Perímetro (para rodapé)",
     "doors": "Portas",
     "windows": "Janelas",
     "addDoorType": "+ Adicionar tipo de porta",
@@ -88,6 +89,8 @@
     "quantity": "Qtd.",
     "size": "Tamanho",
     "removeItem": "Remover",
+    "widthSmall": "Largura",
+    "heightSmall": "Altura",
     "surfacesTitle": "Superfícies para pintar (cômodo ativo)",
     "walls": "paredes",
     "ceiling": "teto",
@@ -102,10 +105,13 @@
     "useDefault": "Usar padrão",
     "unitsSqFt": "Unidades: ft²/gal",
     "includePrimer": "Incluir primer",
+    "primerCoats": "Demãos de primer",
+    "primerCoverage": "Cobertura do primer",
     "costTitle": "Estimativa de custos (projeto)",
     "paintPrice": "Preço da tinta (por galão)",
     "primerPrice": "Preço do primer (por galão)",
     "includeLabor": "Incluir mão de obra",
+    "laborRate": "Taxa de mão de obra (por hora)",
     "includeSupplies": "Incluir materiais",
     "brushes": "Pincéis e rolos ($)",
     "tape": "Fita de pintor ($)",
@@ -125,17 +131,53 @@
     "perCoatCoverage": "Por demão • Rendimento: {rate} {unit}",
     "costBreakdown": "Detalhamento de custos",
     "paintBySurface": "Tinta por superfície",
-    "paint": "Tinta",
-    "supplies": "Materiais",
+    "paint": "Tinta",\n    "primerLabel": "Primer",\n    "supplies": "Materiais",
     "total": "Total",
     "shoppingList": "Lista de compras",
     "printShopping": "Imprimir lista de compras",
     "roomBreakdown": "Detalhe por cômodo",
     "proTips": "Dicas pro",
+    "proTipsTitle": "Dicas pro",
+    "proTip1": "Compre 10–15% de tinta extra para retoques",
+    "proTip2": "Use primer em cores escuras antes de pintar claro",
+    "proTip3": "Duas demãos finas > uma grossa",
+    "proTip4": "Guarde os rótulos das tintas para referência",
+    "proTip5": "Melhores condições: baixa umidade, 10–30°C",
     "surfaceGuide": "Guia de condição da superfície",
     "coverageInfo": "Informações de cobertura",
+    "coverageTip": "Se souber o rendimento da sua marca, coloque em “Rendimento da tinta” para mais precisão.",
     "modalSaveTitle": "Salvar projeto",
     "modalProjectName": "Nome do projeto",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "conditionOptions": {
+      "new": "Novo / Excelente (100%)",
+      "good": "Bom (110%)",
+      "fair": "Regular - precisa de reparos (120%)",
+      "poor": "Ruim - grandes reparos (130%)"
+    },
+    "paintTypes": {
+      "latex": "Látex",
+      "oil": "Base de óleo",
+      "enamel": "Esmalte",
+      "exterior": "Exterior",
+      "ceiling": "Teto"
+    },
+    "paintFinishes": {
+      "flat": "Fosco",
+      "eggshell": "Eggshell",
+      "satin": "Acetinado",
+      "semigloss": "Semibrilho",
+      "gloss": "Alto brilho"
+    },
+    "roomBreakdownLabels": {
+      "area": "Área a pintar",
+      "time": "Tempo",
+      "paint": "Pintura (cômodo)",
+      "primer": "Primer (cômodo)"
+    },
+    "coverageTypical": "Cobertura típica: muitas tintas cobrem ~350–450 ft²/gal (˜ 32–42 m²/gal) por demão.",
+    "coverageWhy": "Por que varia: textura, porosidade e mudança de cor (escuro para claro) reduzem a cobertura.",
+    "wainscotingNote": "Nota: a redução por lambril usa o perímetro do cômodo (insira o perímetro no modo de área direta)."
   }
 }
+

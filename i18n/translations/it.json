@@ -81,6 +81,7 @@
     "length": "Lunghezza (ft)",
     "width": "Larghezza (ft)",
     "height": "Altezza (ft)",
+    "perimeter": "Perimetro (per cornici)",
     "doors": "Porte",
     "windows": "Finestre",
     "addDoorType": "+ Aggiungi tipo di porta",
@@ -88,6 +89,8 @@
     "quantity": "Qtà",
     "size": "Dimensione",
     "removeItem": "Rimuovi",
+    "widthSmall": "Larghezza",
+    "heightSmall": "Altezza",
     "surfacesTitle": "Superfici da dipingere (stanza attiva)",
     "walls": "pareti",
     "ceiling": "soffitto",
@@ -102,10 +105,13 @@
     "useDefault": "Usa predefinito",
     "unitsSqFt": "Unità: ft²/gal",
     "includePrimer": "Includi primer",
+    "primerCoats": "Mani di primer",
+    "primerCoverage": "Copertura del primer",
     "costTitle": "Stima costi (progetto)",
     "paintPrice": "Prezzo pittura (per gallone)",
     "primerPrice": "Prezzo primer (per gallone)",
     "includeLabor": "Includi manodopera",
+    "laborRate": "Tariffa oraria manodopera",
     "includeSupplies": "Includi materiali",
     "brushes": "Pennelli e rulli ($)",
     "tape": "Nastro da pittore ($)",
@@ -125,17 +131,53 @@
     "perCoatCoverage": "Per mano • Copertura: {rate} {unit}",
     "costBreakdown": "Dettaglio costi",
     "paintBySurface": "Pittura per superficie",
-    "paint": "Pittura",
-    "supplies": "Materiali",
+    "paint": "Pittura",\n    "primerLabel": "Primer",\n    "supplies": "Materiali",
     "total": "Totale",
     "shoppingList": "Lista della spesa",
     "printShopping": "Stampa lista",
     "roomBreakdown": "Dettaglio per stanza",
     "proTips": "Consigli pro",
+    "proTipsTitle": "Consigli pro",
+    "proTip1": "Compra il 10–15% di pittura in più per ritocchi",
+    "proTip2": "Applica primer su colori scuri prima di pitturare chiaro",
+    "proTip3": "Due mani sottili > una spessa",
+    "proTip4": "Conserva le etichette della pittura per riferimento",
+    "proTip5": "Condizioni ideali: bassa umidità, 10–30°C",
     "surfaceGuide": "Guida stato superfici",
     "coverageInfo": "Info copertura",
+    "coverageTip": "Se conosci la copertura della tua marca, inseriscila in “Copertura della pittura” per più precisione.",
     "modalSaveTitle": "Salva progetto",
     "modalProjectName": "Nome progetto",
-    "cancel": "Annulla"
+    "cancel": "Annulla",
+    "conditionOptions": {
+      "new": "Nuovo / Eccellente (100%)",
+      "good": "Buono (110%)",
+      "fair": "Discreto - necessita riparazioni (120%)",
+      "poor": "Scarso - grandi riparazioni (130%)"
+    },
+    "paintTypes": {
+      "latex": "Lattice",
+      "oil": "A base di olio",
+      "enamel": "Smalto",
+      "exterior": "Esterno",
+      "ceiling": "Soffitto"
+    },
+    "paintFinishes": {
+      "flat": "Opaco",
+      "eggshell": "Eggshell",
+      "satin": "Satinato",
+      "semigloss": "Semilucido",
+      "gloss": "Lucido"
+    },
+    "roomBreakdownLabels": {
+      "area": "Area da dipingere",
+      "time": "Tempo",
+      "paint": "Pittura (stanza)",
+      "primer": "Primer (stanza)"
+    },
+    "coverageTypical": "Copertura tipica: molte pitture coprono ~350–450 ft²/gal (˜ 32–42 m²/gal) per mano.",
+    "coverageWhy": "Perché varia: consistenza, porosità e cambi di colore (scuro a chiaro) riducono la copertura.",
+    "wainscotingNote": "Nota: la riduzione per boiserie usa il perimetro (inserisci il perimetro in modalità area diretta)."
   }
 }
+

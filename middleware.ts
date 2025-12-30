@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-const locales = ['en', 'es', 'pt', 'fr', 'de', 'it', 'nl'] as const;
-const defaultLocale = 'en' as const;
-
-type Locale = (typeof locales)[number];
+import { locales, defaultLocale, type Locale } from './i18n/config';
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -34,8 +30,8 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next), API routes, static files, and image files
-    '/((?!_next|api|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)).*)',
+    // Skip internal paths, API routes, static assets, and SEO files like sitemap/robots
+    '/((?!_next|api|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)).*)',
   ],
 };
 

@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
-import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config';
+import { locales, localeNames, localeFlags, defaultLocale, type Locale } from '@/i18n/config';
 
 type LanguageSwitcherProps = {
   label?: string;
@@ -16,7 +16,7 @@ export default function LanguageSwitcher({ label = 'Languages' }: LanguageSwitch
   const menuId = 'language-menu';
 
   // Extract current locale from pathname
-  const currentLocale = (locales.includes(pathname.split('/')[1] as Locale) ? pathname.split('/')[1] : 'en') as Locale;
+  const currentLocale = (locales.includes(pathname.split('/')[1] as Locale) ? pathname.split('/')[1] : defaultLocale) as Locale;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

@@ -81,6 +81,7 @@
     "length": "Länge (ft)",
     "width": "Breite (ft)",
     "height": "Höhe (ft)",
+    "perimeter": "Umfang (für Leisten)",
     "doors": "Türen",
     "windows": "Fenster",
     "addDoorType": "+ Türtyp hinzufügen",
@@ -88,6 +89,8 @@
     "quantity": "Menge",
     "size": "Größe",
     "removeItem": "Entfernen",
+    "widthSmall": "Breite",
+    "heightSmall": "Höhe",
     "surfacesTitle": "Zu streichende Flächen (aktiver Raum)",
     "walls": "wände",
     "ceiling": "decke",
@@ -102,10 +105,13 @@
     "useDefault": "Standard verwenden",
     "unitsSqFt": "Einheiten: ft²/gal",
     "includePrimer": "Grundierung einbeziehen",
+    "primerCoats": "Grundierungsschichten",
+    "primerCoverage": "Deckkraft der Grundierung",
     "costTitle": "Kostenschätzung (Projekt)",
     "paintPrice": "Farbpreis (pro Gallone)",
     "primerPrice": "Grundierungspreis (pro Gallone)",
     "includeLabor": "Arbeitskosten einbeziehen",
+    "laborRate": "Stundensatz Arbeit",
     "includeSupplies": "Materialkosten einbeziehen",
     "brushes": "Pinsel & Rollen ($)",
     "tape": "Malerband ($)",
@@ -125,17 +131,53 @@
     "perCoatCoverage": "Pro Anstrich • Deckkraft: {rate} {unit}",
     "costBreakdown": "Kostenaufstellung",
     "paintBySurface": "Farbe nach Fläche",
-    "paint": "Farbe",
-    "supplies": "Materialien",
+    "paint": "Farbe",\n    "primerLabel": "Grundierung",\n    "supplies": "Materialien",
     "total": "Gesamt",
     "shoppingList": "Einkaufsliste",
     "printShopping": "Einkaufsliste drucken",
     "roomBreakdown": "Aufschlüsselung nach Raum",
     "proTips": "Profi-Tipps",
+    "proTipsTitle": "Profi-Tipps",
+    "proTip1": "10–15% extra Farbe für Ausbesserungen kaufen",
+    "proTip2": "Dunkle Farben vor hellem Anstrich grundieren",
+    "proTip3": "Zwei dünne Anstriche > ein dicker",
+    "proTip4": "Farb-Etiketten für später aufbewahren",
+    "proTip5": "Beste Bedingungen: niedrige Luftfeuchte, 10–30°C",
     "surfaceGuide": "Leitfaden Oberflächenzustand",
     "coverageInfo": "Informationen zur Deckkraft",
+    "coverageTip": "Wenn Sie die Deckkraft Ihrer Marke kennen, tragen Sie sie bei „Deckkraft der Farbe“ ein.",
     "modalSaveTitle": "Projekt speichern",
     "modalProjectName": "Projektname",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "conditionOptions": {
+      "new": "Neu / Exzellent (100%)",
+      "good": "Gut (110%)",
+      "fair": "Mittel - Reparaturen nötig (120%)",
+      "poor": "Schlecht - große Reparaturen (130%)"
+    },
+    "paintTypes": {
+      "latex": "Latex",
+      "oil": "Ölbasiert",
+      "enamel": "Emaille",
+      "exterior": "Außen",
+      "ceiling": "Decke"
+    },
+    "paintFinishes": {
+      "flat": "Matt",
+      "eggshell": "Eierschale",
+      "satin": "Satin",
+      "semigloss": "Halbglanz",
+      "gloss": "Hochglanz"
+    },
+    "roomBreakdownLabels": {
+      "area": "Zu streichende Fläche",
+      "time": "Zeit",
+      "paint": "Farbe (Raum)",
+      "primer": "Grundierung (Raum)"
+    },
+    "coverageTypical": "Typische Deckkraft: viele Farben decken ~350–450 ft²/gal (˜ 32–42 m²/gal) pro Anstrich.",
+    "coverageWhy": "Warum es variiert: Textur, Porosität und Farbwechsel (dunkel nach hell) verringern die Deckkraft.",
+    "wainscotingNote": "Hinweis: Die Reduktion durch Wandverkleidung nutzt den Raumumfang (Umfang im Direktflächen-Modus eingeben)."
   }
 }
+

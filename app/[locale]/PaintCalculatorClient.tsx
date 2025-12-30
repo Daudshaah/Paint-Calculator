@@ -855,6 +855,13 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     trim: { label: ui.tabs.trim, icon: <Settings size={16} /> },
   };
 
+  const surfaceLabelMap: Record<keyof Surfaces, string> = {
+    walls: ui.walls,
+    ceiling: ui.ceiling,
+    trim: ui.trim,
+    doors: ui.doorsSurface,
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 print:bg-white print:p-0">
       <div className="max-w-7xl mx-auto print:max-w-none">
@@ -1148,7 +1155,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Wall area ({unitText.area})</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{`${ui.walls} (${unitText.area})`}</label>
                     <input
                       type="number"
                       value={activeRoom.measurements.directWallArea}
@@ -1164,7 +1171,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Ceiling area (optional)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{`${ui.ceiling} (${unitText.area})`}</label>
                     <input
                       type="number"
                       value={activeRoom.measurements.directCeilingArea}
@@ -1180,7 +1187,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Perimeter (for trim) ({unitText.length})</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{`${ui.perimeter ?? 'Perimeter'} (${unitText.length})`}</label>
                     <input
                       type="number"
                       value={activeRoom.measurements.directPerimeter}
@@ -1201,7 +1208,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               <div className="grid grid-cols-1 gap-6">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="font-medium text-gray-900">Doors</div>
+                    <div className="font-medium text-gray-900 capitalize">{ui.doors}</div>
                     <button
                       onClick={() =>
                         updateRoom(activeRoom.id, (r) => ({
@@ -1214,7 +1221,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       }
                       className="text-sm px-3 py-1 rounded-lg border hover:bg-gray-50"
                     >
-                      + Add door type
+                      {ui.addDoorType}
                     </button>
                   </div>
 
@@ -1222,7 +1229,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     {activeRoom.measurements.doors.map((d) => (
                       <div key={d.id} className="grid grid-cols-1 md:grid-cols-12 gap-2 p-3 border rounded-lg">
                         <div className="md:col-span-3">
-                          <label className="block text-xs text-gray-600 mb-1">Qty</label>
+                          <label className="block text-xs text-gray-600 mb-1">{ui.quantity}</label>
                           <input
                             type="number"
                             min={0}
@@ -1242,7 +1249,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                           />
                         </div>
                         <div className="md:col-span-6">
-                          <label className="block text-xs text-gray-600 mb-1">Size</label>
+                          <label className="block text-xs text-gray-600 mb-1">{ui.size}</label>
                           <select
                             value={d.size}
                             onChange={(e) =>
@@ -1274,13 +1281,13 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                             disabled={activeRoom.measurements.doors.length <= 1}
                             className="w-full px-3 py-2 text-sm border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
-                            Remove
+                            {ui.removeItem}
                           </button>
                         </div>
                         {d.size === 'custom' && (
                           <div className="md:col-span-12 grid grid-cols-2 gap-2">
                             <div>
-                              <label className="block text-xs text-gray-600 mb-1">Width ({unitText.small})</label>
+                              <label className="block text-xs text-gray-600 mb-1">{`${ui.widthSmall} (${unitText.small})`}</label>
                               <input
                                 type="number"
                                 min={0}
@@ -1298,7 +1305,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                               />
                             </div>
                             <div>
-                              <label className="block text-xs text-gray-600 mb-1">Height ({unitText.small})</label>
+                              <label className="block text-xs text-gray-600 mb-1">{`${ui.heightSmall} (${unitText.small})`}</label>
                               <input
                                 type="number"
                                 min={0}
@@ -1324,7 +1331,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="font-medium text-gray-900">Windows</div>
+                    <div className="font-medium text-gray-900 capitalize">{ui.windows}</div>
                     <button
                       onClick={() =>
                         updateRoom(activeRoom.id, (r) => ({
@@ -1337,7 +1344,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       }
                       className="text-sm px-3 py-1 rounded-lg border hover:bg-gray-50"
                     >
-                      + Add window type
+                      {ui.addWindowType}
                     </button>
                   </div>
 
@@ -1345,7 +1352,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     {activeRoom.measurements.windows.map((w) => (
                       <div key={w.id} className="grid grid-cols-1 md:grid-cols-12 gap-2 p-3 border rounded-lg">
                         <div className="md:col-span-3">
-                          <label className="block text-xs text-gray-600 mb-1">Qty</label>
+                          <label className="block text-xs text-gray-600 mb-1">{ui.quantity}</label>
                           <input
                             type="number"
                             min={0}
@@ -1365,7 +1372,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                           />
                         </div>
                         <div className="md:col-span-6">
-                          <label className="block text-xs text-gray-600 mb-1">Size</label>
+                          <label className="block text-xs text-gray-600 mb-1">{ui.size}</label>
                           <select
                             value={w.size}
                             onChange={(e) =>
@@ -1397,13 +1404,13 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                             disabled={activeRoom.measurements.windows.length <= 1}
                             className="w-full px-3 py-2 text-sm border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
-                            Remove
+                            {ui.removeItem}
                           </button>
                         </div>
                         {w.size === 'custom' && (
                           <div className="md:col-span-12 grid grid-cols-2 gap-2">
                             <div>
-                              <label className="block text-xs text-gray-600 mb-1">Width ({unitText.small})</label>
+                              <label className="block text-xs text-gray-600 mb-1">{`${ui.widthSmall} (${unitText.small})`}</label>
                               <input
                                 type="number"
                                 min={0}
@@ -1421,7 +1428,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                               />
                             </div>
                             <div>
-                              <label className="block text-xs text-gray-600 mb-1">Height ({unitText.small})</label>
+                              <label className="block text-xs text-gray-600 mb-1">{`${ui.heightSmall} (${unitText.small})`}</label>
                               <input
                                 type="number"
                                 min={0}
@@ -1458,39 +1465,39 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     <input
                       type="checkbox"
                       checked={value}
-                      onChange={(e) =>
-                        updateRoom(activeRoom.id, (r) => ({ ...r, surfaces: { ...r.surfaces, [key]: e.target.checked } }))
-                      }
-                      className="w-5 h-5 text-blue-600"
-                    />
-                    <span className="capitalize font-medium">{key}</span>
-                  </label>
-                ))}
-              </div>
+                    onChange={(e) =>
+                      updateRoom(activeRoom.id, (r) => ({ ...r, surfaces: { ...r.surfaces, [key]: e.target.checked } }))
+                    }
+                    className="w-5 h-5 text-blue-600"
+                  />
+                  <span className="capitalize font-medium">{surfaceLabelMap[key]}</span>
+                </label>
+              ))}
             </div>
+          </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Palette size={20} className="text-blue-600" />
-                Paint Settings (Project)
+                {ui.paintSettingsTitle}
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Number of Coats</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.numberOfCoats}</label>
                   <select
                     value={project.paintDetails.coats}
                     onChange={(e) => setProject((prev) => ({ ...prev, paintDetails: { ...prev.paintDetails, coats: parseInt(e.target.value, 10) } }))}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="1">1 Coat</option>
-                    <option value="2">2 Coats (Recommended)</option>
-                    <option value="3">3 Coats</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Paint Type</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.paintType}</label>
                   <select
                     value={project.paintDetails.paintType}
                     onChange={(e) => {
@@ -1503,31 +1510,31 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     }}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="latex">Latex</option>
-                    <option value="oil">Oil-Based</option>
-                    <option value="enamel">Enamel</option>
-                    <option value="exterior">Exterior</option>
-                    <option value="ceiling">Ceiling</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Paint Finish</label>
-                  <select
-                    value={project.paintDetails.finish}
-                    onChange={(e) => setProject((prev) => ({ ...prev, paintDetails: { ...prev.paintDetails, finish: e.target.value as PaintFinish } }))}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  >
-                    {Object.entries(finishLabel).map(([k, v]) => (
-                      <option key={k} value={k}>
-                        {v}
+                    {Object.entries(ui.paintTypes).map(([key, label]) => (
+                      <option key={key} value={key}>
+                        {label}
                       </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Surface Condition (affects paint needed)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.paintFinish}</label>
+                  <select
+                    value={project.paintDetails.finish}
+                    onChange={(e) => setProject((prev) => ({ ...prev, paintDetails: { ...prev.paintDetails, finish: e.target.value as PaintFinish } }))}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  >
+                    {Object.entries(ui.paintFinishes).map(([key, label]) => (
+                      <option key={key} value={key}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.surfaceCondition}</label>
                   <select
                     value={project.paintDetails.wallCondition}
                     onChange={(e) =>
@@ -1535,15 +1542,16 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     }
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="new">New / Excellent (100%)</option>
-                    <option value="good">Good (110%)</option>
-                    <option value="fair">Fair - needs repairs (120%)</option>
-                    <option value="poor">Poor - major repairs (130%)</option>
+                    {Object.entries(ui.conditionOptions).map(([key, label]) => (
+                      <option key={key} value={key}>
+                        {label}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Paint Coverage Rate</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.paintCoverage}</label>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -1561,12 +1569,14 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                         setProject((prev) => ({ ...prev, paintDetails: { ...prev.paintDetails, paintCoverageRate: defaultCoverageUserUnit } }));
                       }}
                       className="px-4 py-2 border rounded-lg hover:bg-gray-50"
-                      title="Reset to typical default"
+                      title={ui.useDefault}
                     >
-                      Use default
+                      {ui.useDefault}
                     </button>
                   </div>
-                  <div className="text-xs text-gray-600 mt-1">Units: {project.unit === 'metric' ? 'sq m/gal' : 'sq ft/gal'}</div>
+                  <div className="text-xs text-gray-600 mt-1">
+                    {ui.unitsSqFt.replace('sq ft/gal', project.unit === 'metric' ? 'sq m/gal' : 'sq ft/gal')}
+                  </div>
                 </div>
               </div>
 
@@ -1578,13 +1588,13 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     onChange={(e) => setProject((prev) => ({ ...prev, paintDetails: { ...prev.paintDetails, usePrimer: e.target.checked } }))}
                     className="w-5 h-5 text-blue-600"
                   />
-                  <span className="font-medium">Include primer</span>
+                  <span className="font-medium">{ui.includePrimer}</span>
                 </label>
 
                 {project.paintDetails.usePrimer && (
                   <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Primer coats</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{ui.primerCoats}</label>
                       <select
                         value={project.paintDetails.primerCoats}
                         onChange={(e) =>
@@ -1592,12 +1602,12 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                       >
-                        <option value="1">1 Coat</option>
-                        <option value="2">2 Coats</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                       </select>
                     </div>
                     <div className="sm:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Primer Coverage Rate</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{ui.primerCoverage}</label>
                       <div className="flex gap-2">
                         <input
                           type="number"
@@ -1617,10 +1627,12 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                           }
                           className="px-4 py-2 border rounded-lg hover:bg-gray-50"
                         >
-                          Use default
+                          {ui.useDefault}
                         </button>
                       </div>
-                      <div className="text-xs text-gray-600 mt-1">Units: {project.unit === 'metric' ? 'sq m/gal' : 'sq ft/gal'}</div>
+                      <div className="text-xs text-gray-600 mt-1">
+                        {ui.unitsSqFt.replace('sq ft/gal', project.unit === 'metric' ? 'sq m/gal' : 'sq ft/gal')}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -1630,12 +1642,12 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <DollarSign size={20} className="text-blue-600" />
-                Cost Estimation (Project)
+                {ui.costTitle}
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Paint price (per gallon)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.paintPrice}</label>
                   <input
                     type="number"
                     value={project.costDetails.paintPrice}
@@ -1645,7 +1657,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Primer price (per gallon)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{ui.primerPrice}</label>
                   <input
                     type="number"
                     value={project.costDetails.primerPrice}
@@ -1664,11 +1676,11 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     onChange={(e) => setProject((prev) => ({ ...prev, costDetails: { ...prev.costDetails, calculateLabor: e.target.checked } }))}
                     className="w-5 h-5 text-green-600"
                   />
-                  <span className="font-medium">Include labor cost</span>
+                  <span className="font-medium">{ui.includeLabor}</span>
                 </label>
                 {project.costDetails.calculateLabor && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Labor rate (per hour)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{ui.laborRate}</label>
                     <input
                       type="number"
                       value={project.costDetails.laborRate}
@@ -1688,12 +1700,12 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     onChange={(e) => setProject((prev) => ({ ...prev, costDetails: { ...prev.costDetails, includeMaterials: e.target.checked } }))}
                     className="w-5 h-5 text-purple-600"
                   />
-                  <span className="font-medium">Include supplies cost</span>
+                  <span className="font-medium">{ui.includeSupplies}</span>
                 </label>
                 {project.costDetails.includeMaterials && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs text-gray-600 mb-1">Brushes & rollers ($)</label>
+                      <label className="block text-xs text-gray-600 mb-1">{ui.brushes}</label>
                       <input
                         type="number"
                         value={project.costDetails.brushRoller}
@@ -1703,7 +1715,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-600 mb-1">Painter's tape ($)</label>
+                      <label className="block text-xs text-gray-600 mb-1">{ui.tape}</label>
                       <input
                         type="number"
                         value={project.costDetails.tape}
@@ -1713,7 +1725,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-600 mb-1">Drop cloths ($)</label>
+                      <label className="block text-xs text-gray-600 mb-1">{ui.dropCloths}</label>
                       <input
                         type="number"
                         value={project.costDetails.dropCloths}
@@ -1723,7 +1735,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-600 mb-1">Other supplies ($)</label>
+                      <label className="block text-xs text-gray-600 mb-1">{ui.otherSupplies}</label>
                       <input
                         type="number"
                         value={project.costDetails.other}
@@ -1753,12 +1765,12 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       }
                       className="w-5 h-5"
                     />
-                    <span className="font-medium">Accent wall (different color/calculation)</span>
+                    <span className="font-medium">{ui.accentWall}</span>
                   </label>
                   {activeRoom.extras.accentWall && (
                     <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm text-gray-600 mb-1">Accent wall area ({unitText.area})</label>
+                        <label className="block text-sm text-gray-600 mb-1">{`${ui.accentWall} (${unitText.area})`}</label>
                         <input
                           type="number"
                           min={0}
@@ -1770,7 +1782,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                         />
                       </div>
                       <div className="text-xs text-gray-600 self-end">
-                        Tip: enter one wall area (e.g., width × height) if you want “1 accent wall”.
+                        {ui.coverageTip}
                       </div>
                     </div>
                   )}
@@ -1790,7 +1802,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                   </label>
                   {activeRoom.extras.wainscoting && (
                     <div className="mt-3">
-                      <label className="block text-sm text-gray-600 mb-1">Height ({unitText.small})</label>
+                      <label className="block text-sm text-gray-600 mb-1">{`${ui.heightSmall} (${unitText.small})`}</label>
                       <input
                         type="number"
                         min={0}
@@ -1804,7 +1816,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                         className="w-full px-3 py-2 border rounded-lg"
                       />
                       <div className="text-xs text-gray-600 mt-1">
-                        Note: wainscoting reduction uses room perimeter (enter perimeter in “direct wall area” mode).
+                        {ui.wainscotingNote}
                       </div>
                     </div>
                   )}
@@ -1816,11 +1828,11 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     checked={activeRoom.extras.crownMolding}
                     onChange={(e) =>
                       updateRoom(activeRoom.id, (r) => ({ ...r, extras: { ...r.extras, crownMolding: e.target.checked } }))
-                    }
-                    className="w-5 h-5"
-                  />
-                  <span className="font-medium">Crown molding (adds trim area)</span>
-                </label>
+                      }
+                      className="w-5 h-5"
+                    />
+                    <span className="font-medium">{ui.crownMolding}</span>
+                  </label>
 
                 <div className="p-3 border rounded-lg">
                   <label className="flex items-center gap-3 cursor-pointer">
@@ -1832,11 +1844,11 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                       }
                       className="w-5 h-5"
                     />
-                    <span className="font-medium">Fireplace (exclude area)</span>
+                    <span className="font-medium">{ui.fireplace}</span>
                   </label>
                   {activeRoom.extras.fireplace && (
                     <div className="mt-3">
-                      <label className="block text-sm text-gray-600 mb-1">Exclude area ({unitText.area})</label>
+                      <label className="block text-sm text-gray-600 mb-1">{`${ui.fireplace} (${unitText.area})`}</label>
                       <input
                         type="number"
                         min={0}
@@ -1864,7 +1876,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                   </label>
                   {activeRoom.extras.builtIns && (
                     <div className="mt-3">
-                      <label className="block text-sm text-gray-600 mb-1">Exclude area ({unitText.area})</label>
+                      <label className="block text-sm text-gray-600 mb-1">{`${ui.builtIns} (${unitText.area})`}</label>
                       <input
                         type="number"
                         min={0}
@@ -1883,31 +1895,31 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
 
           <div className="space-y-6">
             <div className="bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-lg shadow-lg p-6 print:shadow-none print:rounded-none print:bg-white print:text-black print:border">
-              <h3 className="text-xl font-bold mb-4">Project Summary (All Rooms)</h3>
+              <h3 className="text-xl font-bold mb-4">{ui.summaryTitle}</h3>
               <div className="space-y-4">
                 <div className="bg-white/95 text-gray-900 rounded-xl p-4 shadow-sm print:bg-transparent print:p-0">
-                  <div className="text-sm text-gray-800 mb-1 print:text-black">Total area to paint</div>
+                  <div className="text-sm text-gray-800 mb-1 print:text-black">{ui.totalArea}</div>
                   <div className="text-3xl font-bold text-gray-900">
                     {formatArea(totals.totalArea)} {unitText.area}
                   </div>
                 </div>
                 <div className="bg-white/95 text-gray-900 rounded-xl p-4 shadow-sm print:bg-transparent print:p-0">
-                  <div className="text-sm text-gray-800 mb-1 print:text-black">Estimated time</div>
+                  <div className="text-sm text-gray-800 mb-1 print:text-black">{ui.estimatedTime}</div>
                   <div className="text-3xl font-bold text-gray-900">{totals.timeEstimate} hours</div>
                 </div>
                 <div className="bg-white/95 text-gray-900 rounded-xl p-4 shadow-sm print:bg-transparent print:p-0">
-                  <div className="text-sm text-gray-800 mb-1 print:text-black">Total project cost</div>
+                  <div className="text-sm text-gray-800 mb-1 print:text-black">{ui.totalCost}</div>
                   <div className="text-3xl font-bold text-gray-900">${totals.totalCost}</div>
                 </div>
               </div>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
-              <h3 className="text-lg font-semibold mb-4">Paint Required</h3>
+              <h3 className="text-lg font-semibold mb-4">{ui.paintRequired}</h3>
               <div className="space-y-3">
                 {any.walls && (
                   <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-                    <span className="font-medium">Walls</span>
+                    <span className="font-medium">{surfaceLabelMap.walls}</span>
                     <span className="text-blue-600 font-bold">
                       {totals.wallPaint.gallons}g {totals.wallPaint.quarts}qt
                     </span>
@@ -1915,7 +1927,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 )}
                 {any.accentWall && (
                   <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
-                    <span className="font-medium">Accent wall</span>
+                    <span className="font-medium">{ui.accentWall}</span>
                     <span className="text-indigo-700 font-bold">
                       {totals.accentWallPaint.gallons}g {totals.accentWallPaint.quarts}qt
                     </span>
@@ -1923,7 +1935,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 )}
                 {any.ceiling && (
                   <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
-                    <span className="font-medium">Ceiling</span>
+                    <span className="font-medium">{surfaceLabelMap.ceiling}</span>
                     <span className="text-purple-600 font-bold">
                       {totals.ceilingPaint.gallons}g {totals.ceilingPaint.quarts}qt
                     </span>
@@ -1931,7 +1943,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 )}
                 {any.trim && (
                   <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-                    <span className="font-medium">Trim</span>
+                    <span className="font-medium">{surfaceLabelMap.trim}</span>
                     <span className="text-green-600 font-bold">
                       {totals.trimPaint.gallons}g {totals.trimPaint.quarts}qt
                     </span>
@@ -1939,7 +1951,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 )}
                 {any.doors && (
                   <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
-                    <span className="font-medium">Doors</span>
+                    <span className="font-medium capitalize">{surfaceLabelMap.doors}</span>
                     <span className="text-yellow-600 font-bold">
                       {totals.doorPaint.gallons}g {totals.doorPaint.quarts}qt
                     </span>
@@ -1947,7 +1959,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 )}
                 {project.paintDetails.usePrimer && (
                   <div className="flex justify-between items-center p-3 bg-gray-100 rounded-lg">
-                    <span className="font-medium">Primer</span>
+                    <span className="font-medium">{ui.primerLabel}</span>
                     <span className="text-gray-700 font-bold">
                       {totals.primer.gallons}g {totals.primer.quarts}qt
                     </span>
@@ -1956,72 +1968,74 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
               </div>
               <div className="mt-4 pt-4 border-t">
                 <div className="text-sm text-gray-600">
-                  Per coat • Coverage: {project.paintDetails.paintCoverageRate} {project.unit === 'metric' ? 'sq m/gal' : 'sq ft/gal'}
+                  {ui.perCoatCoverage
+                    .replace('{rate}', String(project.paintDetails.paintCoverageRate))
+                    .replace('{unit}', project.unit === 'metric' ? 'sq m/gal' : 'sq ft/gal')}
                 </div>
               </div>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
-              <h3 className="text-lg font-semibold mb-4">Cost Breakdown</h3>
+              <h3 className="text-lg font-semibold mb-4">{ui.costBreakdown}</h3>
               <div className="space-y-2">
-                <div className="text-xs text-gray-500">Paint by surface</div>
+                <div className="text-xs text-gray-500">{ui.paintBySurface}</div>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
                   {any.walls && (
                     <>
-                      <div className="text-gray-600">Walls</div>
+                      <div className="text-gray-600">{surfaceLabelMap.walls}</div>
                       <div className="text-right font-medium">${totals.paintBySurfaceCost.walls}</div>
                     </>
                   )}
                   {any.accentWall && (
                     <>
-                      <div className="text-gray-600">Accent wall</div>
+                      <div className="text-gray-600">{ui.accentWall}</div>
                       <div className="text-right font-medium">${totals.paintBySurfaceCost.accentWall}</div>
                     </>
                   )}
                   {any.ceiling && (
                     <>
-                      <div className="text-gray-600">Ceiling</div>
+                      <div className="text-gray-600">{surfaceLabelMap.ceiling}</div>
                       <div className="text-right font-medium">${totals.paintBySurfaceCost.ceiling}</div>
                     </>
                   )}
                   {any.trim && (
                     <>
-                      <div className="text-gray-600">Trim</div>
+                      <div className="text-gray-600">{surfaceLabelMap.trim}</div>
                       <div className="text-right font-medium">${totals.paintBySurfaceCost.trim}</div>
                     </>
                   )}
                   {any.doors && (
                     <>
-                      <div className="text-gray-600">Doors</div>
+                      <div className="text-gray-600 capitalize">{surfaceLabelMap.doors}</div>
                       <div className="text-right font-medium">${totals.paintBySurfaceCost.doors}</div>
                     </>
                   )}
                 </div>
                 <div className="pt-2 border-t" />
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Paint</span>
+                  <span className="text-gray-600">{ui.paint}</span>
                   <span className="font-semibold">${totals.paintCost}</span>
                 </div>
                 {project.paintDetails.usePrimer && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Primer</span>
+                    <span className="text-gray-600">{ui.primerLabel}</span>
                     <span className="font-semibold">${totals.primerCost}</span>
                   </div>
                 )}
                 {project.costDetails.includeMaterials && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Supplies</span>
+                    <span className="text-gray-600">{ui.supplies}</span>
                     <span className="font-semibold">${totals.materialsCost}</span>
                   </div>
                 )}
                 {project.costDetails.calculateLabor && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Labor ({totals.timeEstimate}h)</span>
+                    <span className="text-gray-600">{`${ui.includeLabor} (${totals.timeEstimate}h)`}</span>
                     <span className="font-semibold">${totals.laborCost}</span>
                   </div>
                 )}
                 <div className="flex justify-between pt-3 border-t-2 border-gray-200">
-                  <span className="font-bold text-lg">Total</span>
+                  <span className="font-bold text-lg">{ui.total}</span>
                   <span className="font-bold text-lg text-blue-600">${totals.totalCost}</span>
                 </div>
               </div>

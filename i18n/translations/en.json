@@ -81,6 +81,7 @@
     "length": "Length (ft)",
     "width": "Width (ft)",
     "height": "Height (ft)",
+    "perimeter": "Perimeter (for trim)",
     "doors": "Doors",
     "windows": "Windows",
     "addDoorType": "+ Add door type",
@@ -88,6 +89,8 @@
     "quantity": "Qty",
     "size": "Size",
     "removeItem": "Remove",
+    "widthSmall": "Width",
+    "heightSmall": "Height",
     "surfacesTitle": "Surfaces to Paint (Active Room)",
     "walls": "walls",
     "ceiling": "ceiling",
@@ -102,10 +105,13 @@
     "useDefault": "Use default",
     "unitsSqFt": "Units: sq ft/gal",
     "includePrimer": "Include primer",
+    "primerCoats": "Primer coats",
+    "primerCoverage": "Primer Coverage Rate",
     "costTitle": "Cost Estimation (Project)",
     "paintPrice": "Paint price (per gallon)",
     "primerPrice": "Primer price (per gallon)",
     "includeLabor": "Include labor cost",
+    "laborRate": "Labor rate (per hour)",
     "includeSupplies": "Include supplies cost",
     "brushes": "Brushes & rollers ($)",
     "tape": "Painter's tape ($)",
@@ -126,17 +132,54 @@
     "costBreakdown": "Cost Breakdown",
     "paintBySurface": "Paint by surface",
     "paint": "Paint",
+    "primerLabel": "Primer",
     "supplies": "Supplies",
     "total": "Total",
     "shoppingList": "Shopping List",
     "printShopping": "Print shopping list",
     "roomBreakdown": "Room-by-room breakdown",
     "proTips": "Pro Tips",
+    "proTipsTitle": "Pro Tips",
+    "proTip1": "Buy 10–15% extra paint for touch-ups",
+    "proTip2": "Prime dark colors before painting light",
+    "proTip3": "Two thin coats > one thick coat",
+    "proTip4": "Save paint labels for future reference",
+    "proTip5": "Best conditions: low humidity, 50–85°F (10–30°C)",
     "surfaceGuide": "Surface Condition Guide",
     "coverageInfo": "Paint Coverage Info",
+    "coverageTip": "If you know your brand’s label coverage, enter it in “Paint Coverage Rate” for best accuracy.",
     "modalSaveTitle": "Save project",
     "modalProjectName": "Project name",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "conditionOptions": {
+      "new": "New / Excellent (100%)",
+      "good": "Good (110%)",
+      "fair": "Fair - needs repairs (120%)",
+      "poor": "Poor - major repairs (130%)"
+    },
+    "paintTypes": {
+      "latex": "Latex",
+      "oil": "Oil-Based",
+      "enamel": "Enamel",
+      "exterior": "Exterior",
+      "ceiling": "Ceiling"
+    },
+    "paintFinishes": {
+      "flat": "Flat / Matte",
+      "eggshell": "Eggshell",
+      "satin": "Satin",
+      "semigloss": "Semi-Gloss",
+      "gloss": "High Gloss"
+    },
+    "roomBreakdownLabels": {
+      "area": "Area to paint",
+      "time": "Time",
+      "paint": "Paint (room)",
+      "primer": "Primer (room)"
+    },
+    "coverageTypical": "Typical coverage: many paints cover ~350–450 sq ft/gal (≈ 32–42 sq m/gal) per coat.",
+    "coverageWhy": "Why it varies: texture (orange peel, popcorn), porosity (new drywall), and color changes (dark-to-light) reduce coverage.",
+    "wainscotingNote": "Note: wainscoting reduction uses room perimeter (enter perimeter in “direct wall area” mode)."
   }
 }
 
