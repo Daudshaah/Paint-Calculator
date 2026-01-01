@@ -5,7 +5,7 @@ import { Ruler, DollarSign, Home, Droplet, Info, Download, Share2, Save, Palette
 import { Locale } from '@/i18n/config';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { getTranslations } from '@/i18n';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+// Language switcher is placed in the main header; no need inside the hero area.
 
 type UnitSystem = 'imperial' | 'metric';
 
@@ -868,20 +868,13 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
         <div className="mb-6 print:hidden">
           <div className="relative rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-visible">
             <div className="flex flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg flex items-center justify-center">
-                  <Palette className="text-white" size={26} />
-                </div>
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-blue-600">Paint Calculator</p>
-                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{ui.heroTitle}</h1>
-                  <p className="text-sm text-gray-600">{ui.heroSubtitle}</p>
-                </div>
-              </div>
+            <div className="flex flex-col gap-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{ui.heroTitle}</h1>
+              <p className="text-sm text-gray-600">{ui.heroSubtitle}</p>
+            </div>
 
               <div className="flex flex-col gap-3 w-full lg:w-auto">
                 <div className="flex flex-wrap items-center justify-end gap-3">
-                  <LanguageSwitcher label={ui.languages} />
                   <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border border-blue-100 rounded-xl shadow-inner">
                     <select
                       value={selectedSavedId}

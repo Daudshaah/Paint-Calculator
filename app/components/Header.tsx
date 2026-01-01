@@ -11,8 +11,8 @@ export default function Header({ locale }: HeaderProps) {
 
   return (
     <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
-      <div className="max-w-6xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between gap-6">
           <div className="flex items-center gap-3 shrink-0">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
               <svg
@@ -30,7 +30,7 @@ export default function Header({ locale }: HeaderProps) {
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
                 {t.header.title}
               </h1>
               <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -38,16 +38,15 @@ export default function Header({ locale }: HeaderProps) {
               </p>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-200">
-            <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              How It Works
-            </a>
-            <span className="text-gray-300 dark:text-gray-600">|</span>
-            <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              Help
-            </a>
-          </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-200">
+              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                How It Works
+              </a>
+              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Help
+              </a>
+            </nav>
             <LanguageSwitcher />
           </div>
         </div>
