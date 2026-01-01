@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import { Locale, locales, defaultLocale } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
 
@@ -88,6 +89,7 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header locale={locale} />
         <script
           type="application/ld+json"
           suppressHydrationWarning
