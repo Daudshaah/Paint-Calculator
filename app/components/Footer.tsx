@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getTranslations } from '@/i18n';
 import { Locale } from '@/i18n/config';
 
@@ -30,28 +31,28 @@ export default function Footer({ locale }: FooterProps) {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
+                <Link
+                  href={`/${locale}/how-it-works`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.howToUse}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href={`/${locale}/tips-and-tricks`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.tips}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href={`/${locale}/help`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.faq}
-                </a>
+                </Link>
               </li>
               <li>
                 <a
