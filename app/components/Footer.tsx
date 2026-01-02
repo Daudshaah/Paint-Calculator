@@ -115,13 +115,13 @@ export default function Footer({ locale }: FooterProps) {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="#"
+                href={`/${locale}/privacy`}
                 className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 {t.footer.privacy}
               </a>
               <a
-                href="#"
+                href={`/${locale}/terms`}
                 className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 {t.footer.terms}
