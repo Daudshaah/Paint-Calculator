@@ -31,36 +31,36 @@ export default function Footer({ locale }: FooterProps) {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href={`/${locale}/how-it-works`}
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   How It Works
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href={`/${locale}/tips-and-tricks`}
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.tips}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href={`/${locale}/faq`}
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.faq}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href={`/${locale}/contact`}
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.contactUs}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -114,18 +114,18 @@ export default function Footer({ locale }: FooterProps) {
               {t.footer.copyright.replace('{year}', currentYear.toString())}
             </p>
             <div className="flex items-center gap-4">
-              <a
+              <Link
                 href={`/${locale}/privacy`}
-                className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 {t.footer.privacy}
-              </a>
-              <a
+              </Link>
+              <Link
                 href={`/${locale}/terms`}
-                className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 {t.footer.terms}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
