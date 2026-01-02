@@ -44,8 +44,8 @@ export default function Header({ locale }: HeaderProps) {
                 </p>
               </div>
             </Link>
-            <div className="flex items-center gap-4 sm:gap-6">
-              <nav className="flex items-center gap-4 text-sm font-medium text-gray-700 dark:text-gray-200">
+            <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+              <nav className="flex items-center gap-3 sm:gap-4 flex-wrap text-sm font-medium text-gray-700 dark:text-gray-200">
                 <Link href={`/${locale}/how-it-works`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   How It Works
                 </Link>
