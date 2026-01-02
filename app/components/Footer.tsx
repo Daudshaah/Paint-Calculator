@@ -121,6 +121,12 @@ export default function Footer({ locale }: FooterProps) {
                 {t.footer.privacy}
               </Link>
               <Link
+                href={`/${locale}/write-for-us`}
+                className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                Write for Us
+              </Link>
+              <Link
                 href={`/${locale}/terms`}
                 className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
