@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Link from 'next/link';
 import LanguageSwitcher from './LanguageSwitcher';
 import { getTranslations } from '@/i18n';
 import { Locale } from '@/i18n/config';
@@ -13,7 +15,7 @@ export default function Header({ locale }: HeaderProps) {
     <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between gap-6">
-          <a
+          <Link
             href="https://thepaintcalculator.com"
             className="flex items-center gap-3 shrink-0 group"
             aria-label="Paint Calculator homepage"
@@ -41,13 +43,13 @@ export default function Header({ locale }: HeaderProps) {
                 {t.header.tagline}
               </p>
             </div>
-          </a>
+          </Link>
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-200">
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <Link href={`/${locale}/how-it-works`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 How It Works
-              </a>
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              </Link>
+              <a href="mailto:support@paintcalculator.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 Help
               </a>
             </nav>
