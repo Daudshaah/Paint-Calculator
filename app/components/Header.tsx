@@ -44,13 +44,13 @@ export default function Header({ locale }: HeaderProps) {
             </div>
           </Link>
           <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-200">
+            <nav className="flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-200">
               <Link href={`/${locale}/how-it-works`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 How It Works
               </Link>
-              <a href="mailto:support@paintcalculator.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <Link href={`/${locale}/help`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 Help
-              </a>
+              </Link>
             </nav>
             <LanguageSwitcher />
           </div>
