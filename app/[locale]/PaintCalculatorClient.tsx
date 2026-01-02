@@ -856,7 +856,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   const handleExportPdf = async () => {
     try {
       const target = printRef.current;
-      if (!target) return handlePrint();
+      if (!target) return;
       const html2canvas = await getHtml2Canvas();
       const jsPDF = await getJsPDF();
       const canvas = await html2canvas(target, { scale: 2 });
@@ -867,8 +867,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
       pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
       pdf.save('paint-calculator.pdf');
     } catch (err) {
-      // Fallback to print dialog if PDF generation fails
-      handlePrint();
+      console.error('PDF export failed', err);
     }
   };
 
@@ -974,6 +973,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
 
                 <div className="flex flex-wrap items-center justify-end gap-2">
                   <button
+                    type="button"
                     onClick={handleSave}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
                   >
@@ -981,6 +981,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     {ui.save}
                   </button>
                   <button
+                    type="button"
                     onClick={handleExportPdf}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-800 shadow-sm hover:border-gray-300 transition"
                   >
@@ -988,6 +989,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                     {ui.pdf}
                   </button>
                   <button
+                    type="button"
                     onClick={handleShare}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 shadow-sm hover:bg-indigo-100 transition"
                   >
