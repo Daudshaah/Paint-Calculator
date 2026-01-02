@@ -35,7 +35,7 @@ export default function Footer({ locale }: FooterProps) {
                   href={`/${locale}/how-it-works`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
-                  {t.footer.howToUse}
+                  How It Works
                 </a>
               </li>
               <li>
