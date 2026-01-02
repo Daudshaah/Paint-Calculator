@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Link from 'next/link';
 import LanguageSwitcher from './LanguageSwitcher';
 import { getTranslations } from '@/i18n';
 import { Locale } from '@/i18n/config';
