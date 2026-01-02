@@ -30,23 +30,22 @@ export default async function TipsAndTricksPage({ params }: { params: Promise<{ 
     {
       title: 'Before You Measure',
       items: [
-        'Measure carefully: wall height floor-to-ceiling and each wall length individually; avoid estimating or rounding.',
-        'Measure rooms separately: add each room individually—even similar rooms vary—and improve overall accuracy.',
-        'Use the correct measurement system: pick Feet/Inches or Meters/Centimeters; do not mix units manually. Switching units converts all values automatically.',
+        'Measure carefully: measure wall height from floor to ceiling and each wall length individually; avoid estimating or rounding numbers. Small errors affect paint quantity.',
+        'Measure rooms separately: add each room individually, even if they look similar. Small differences improve overall accuracy.',
+        'Use the correct measurement system: choose Feet/Inches or Meters/Centimeters. Do not mix units manually; switching units converts all values automatically.',
       ],
     },
     {
       title: 'Measurement Best Practices',
       items: [
-        'Add only non-paintable openings: include doors you will not paint and windows.',
-        'Do not subtract small items: ignore switches, outlets, or small vents.',
-        'Use “Enter wall area directly” for irregular rooms, angled/curved walls, sloped ceilings, or complex layouts to avoid bad length × width math.',
+        'Add only non-paintable openings: include doors you will not paint and windows; do not subtract switches, outlets, or small vents.',
+        'Use "Enter wall area directly" for irregular rooms: angled or curved walls, sloped ceilings, and complex layouts to avoid bad length × width math.',
       ],
     },
     {
       title: 'Paint Quantity Tips',
       items: [
-        'Always allow extra paint: buy 10–15% more than calculated for touch-ups and future repairs to avoid mid-project delays.',
+        'Always allow extra paint: buy 10-15% more than calculated for touch-ups and future repairs; avoid mid-project delays.',
         'Apply two thin coats: better coverage and durability; one thick coat causes streaks and uneven color.',
         'Dark to light color changes need primer: primer improves coverage and reduces paint usage.',
       ],
@@ -54,15 +53,15 @@ export default async function TipsAndTricksPage({ params }: { params: Promise<{ 
     {
       title: 'Surface and Condition Tips',
       items: [
-        'Choose the correct surface condition: rough or damaged surfaces absorb more paint; select the right condition for accurate estimates.',
-        'Trim and doors need different finishes: they typically use semi-gloss or gloss, which may cover differently than wall paint.',
+        'Choose the correct surface condition: rough or damaged surfaces absorb more paint; set the right condition for accurate estimates.',
+        'Trim and doors need different finishes: often semi-gloss or gloss, which may cover differently than wall paint.',
       ],
     },
     {
       title: 'Cost Estimation Tips',
       items: [
-        'Use realistic paint prices: prices vary by brand/finish; enter current local store prices for better budgets.',
-        'Include supplies: brushes/rollers, painter’s tape, drop cloths, and small tools—prevent surprise costs.',
+        'Use realistic paint prices: prices vary by brand and finish; enter current local store prices for better budgets.',
+        'Include supplies: brushes and rollers, painter\'s tape, drop cloths, and small tools to prevent surprise costs.',
         'Labor costs vary: use local labor rates if adding labor, and consider ceiling height and room complexity.',
       ],
     },
@@ -77,7 +76,7 @@ export default async function TipsAndTricksPage({ params }: { params: Promise<{ 
     {
       title: 'Painting Day Tips',
       items: [
-        'Paint under proper conditions: 50–85°F (10–30°C), low humidity, good ventilation.',
+        'Paint under proper conditions: 50-85°F (10-30°C), low humidity, good ventilation.',
         'Follow the correct order: ceiling → walls → trim to reduce rework and mess.',
         'Keep paint information: save labels and note brand, color code, and finish for future touch-ups.',
       ],
