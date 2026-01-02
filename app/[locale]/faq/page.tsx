@@ -249,19 +249,22 @@ export default async function FAQPage({ params }: { params: Promise<{ locale: st
 
         <section className="grid gap-4">
           {sections.map((section) => (
-            <div key={section.title} className="p-4 rounded-xl border border-gray-100 bg-gradient-to-r from-white to-blue-50/50 shadow-sm">
+            <div
+              key={section.title}
+              className="p-4 rounded-xl border border-blue-100 bg-gradient-to-r from-white to-blue-50 shadow-sm"
+            >
               <h2 className="text-xl font-semibold text-gray-900 mb-3">{section.title}</h2>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {section.items.map((item) => (
                   <details
                     key={item.question}
-                    className="group rounded-lg border border-transparent hover:border-blue-100 transition-colors bg-white/80"
+                    className="group rounded-lg border border-blue-100 bg-white shadow-sm hover:shadow-md transition-all"
                   >
-                    <summary className="cursor-pointer list-none px-3 py-2 flex items-start justify-between gap-3">
+                    <summary className="cursor-pointer list-none px-4 py-3 flex items-start justify-between gap-3 bg-blue-50/80 rounded-lg">
                       <span className="font-medium text-gray-900 group-hover:text-blue-700">{item.question}</span>
-                      <span className="text-gray-400 group-open:rotate-180 transition-transform">▾</span>
+                      <span className="text-blue-500 group-open:rotate-180 transition-transform">▾</span>
                     </summary>
-                    <div className="px-4 pb-3">
+                    <div className="px-5 pb-4 pt-2">
                       <ul className="list-disc pl-5 text-gray-700 space-y-1">
                         {item.answers.map((ans) => (
                           <li key={ans}>{ans}</li>
