@@ -207,6 +207,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     },
   });
 
+  const printRef = useRef<HTMLDivElement | null>(null);
   const [project, setProject] = useState<ProjectState>(() => ({
     activeTab: 'interior',
     unit: 'imperial',
@@ -802,6 +803,34 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     window.print();
   };
 
+  const loadScript = (src: string) =>
+    new Promise<void>((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) {
+        existing.addEventListener('load', () => resolve());
+        resolve();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.body.appendChild(script);
+    });
+
+  const getHtml2Canvas = async () => {
+    if ((window as any).html2canvas) return (window as any).html2canvas as typeof import('html2canvas');
+    await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+    return (window as any).html2canvas as typeof import('html2canvas');
+  };
+
+  const getJsPDF = async () => {
+    if ((window as any).jspdf?.jsPDF) return (window as any).jspdf.jsPDF as typeof import('jspdf').jsPDF;
+    await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js');
+    return (window as any).jspdf.jsPDF as typeof import('jspdf').jsPDF;
+  };
+
   const handleShare = async () => {
     try {
       const json = JSON.stringify(project);
@@ -816,9 +845,23 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     }
   };
 
-  const handleExportPdf = () => {
-    // Export-to-PDF via print dialog (Save as PDF)
-    handlePrint();
+  const handleExportPdf = async () => {
+    try {
+      const target = printRef.current;
+      if (!target) return handlePrint();
+      const html2canvas = await getHtml2Canvas();
+      const jsPDF = await getJsPDF();
+      const canvas = await html2canvas(target, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = (canvas.height * pageWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
+      pdf.save('paint-calculator.pdf');
+    } catch (err) {
+      // Fallback to print dialog if PDF generation fails
+      handlePrint();
+    }
   };
 
   const handleSave = () => {
@@ -863,7 +906,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 print:bg-white print:p-0">
+    <div ref={printRef} className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 print:bg-white print:p-0">
       <div className="max-w-7xl mx-auto print:max-w-none">
         <div className="mb-6 print:hidden">
           <div className="relative rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-visible">
