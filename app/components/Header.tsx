@@ -52,6 +52,9 @@ export default function Header({ locale }: HeaderProps) {
                 <Link href={`/${locale}/help`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   Help
                 </Link>
+                <Link href={`/${locale}/write-for-us`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Write for Us
+                </Link>
               </nav>
               <LanguageSwitcher />
             </div>
