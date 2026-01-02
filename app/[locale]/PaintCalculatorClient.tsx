@@ -805,16 +805,24 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
 
   const loadScript = (src: string) =>
     new Promise<void>((resolve, reject) => {
-      const existing = document.querySelector(`script[src="${src}"]`);
+      const existing = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`);
       if (existing) {
-        existing.addEventListener('load', () => resolve());
-        resolve();
+        if (existing.dataset.loaded === 'true') {
+          resolve();
+          return;
+        }
+        existing.addEventListener('load', () => resolve(), { once: true });
+        existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
         return;
       }
       const script = document.createElement('script');
       script.src = src;
       script.async = true;
-      script.onload = () => resolve();
+      script.dataset.loaded = 'false';
+      script.onload = () => {
+        script.dataset.loaded = 'true';
+        resolve();
+      };
       script.onerror = () => reject(new Error(`Failed to load ${src}`));
       document.body.appendChild(script);
     });
