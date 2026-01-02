@@ -250,17 +250,25 @@ export default async function FAQPage({ params }: { params: Promise<{ locale: st
         <section className="grid gap-4">
           {sections.map((section) => (
             <div key={section.title} className="p-4 rounded-xl border border-gray-100 bg-gradient-to-r from-white to-blue-50/50 shadow-sm">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{section.title}</h2>
-              <div className="space-y-3">
+              <h2 className="text-xl font-semibold text-gray-900 mb-3">{section.title}</h2>
+              <div className="space-y-2">
                 {section.items.map((item) => (
-                  <div key={item.question}>
-                    <p className="font-medium text-gray-900">{item.question}</p>
-                    <ul className="list-disc pl-5 text-gray-700 space-y-1 mt-1">
-                      {item.answers.map((ans) => (
-                        <li key={ans}>{ans}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <details
+                    key={item.question}
+                    className="group rounded-lg border border-transparent hover:border-blue-100 transition-colors bg-white/80"
+                  >
+                    <summary className="cursor-pointer list-none px-3 py-2 flex items-start justify-between gap-3">
+                      <span className="font-medium text-gray-900 group-hover:text-blue-700">{item.question}</span>
+                      <span className="text-gray-400 group-open:rotate-180 transition-transform">▾</span>
+                    </summary>
+                    <div className="px-4 pb-3">
+                      <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                        {item.answers.map((ans) => (
+                          <li key={ans}>{ans}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </details>
                 ))}
               </div>
             </div>
