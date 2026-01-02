@@ -31,28 +31,28 @@ export default function Footer({ locale }: FooterProps) {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link
+                <a
                   href={`/${locale}/how-it-works`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.howToUse}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href={`/${locale}/tips-and-tricks`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.tips}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href={`/${locale}/help`}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   {t.footer.faq}
-                </Link>
+                </a>
               </li>
               <li>
                 <a
