@@ -913,7 +913,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   };
 
   return (
-    <div ref={printRef} className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 print:bg-white print:p-0">
+    <div ref={printRef} className="paint-calculator min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 text-slate-900 print:bg-white print:p-0">
       <div className="max-w-7xl mx-auto print:max-w-none">
         <div className="mb-6 print:hidden">
           <div className="relative rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-visible">
@@ -1036,7 +1036,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6 print:hidden">
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <Home size={20} className="text-blue-600" />
                 {ui.rooms}
               </h3>
@@ -1086,7 +1086,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <Settings size={20} className="text-blue-600" />
                 {ui.measurementSystem}
               </h3>
@@ -1112,7 +1112,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <Ruler size={20} className="text-blue-600" />
                 {ui.measurementsTitle}
               </h3>
@@ -1501,7 +1501,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <Home size={20} className="text-blue-600" />
                 Surfaces to Paint (Active Room)
               </h3>
@@ -1523,7 +1523,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
           </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <Palette size={20} className="text-blue-600" />
                 {ui.paintSettingsTitle}
               </h3>
@@ -1686,7 +1686,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <DollarSign size={20} className="text-blue-600" />
                 {ui.costTitle}
               </h3>
@@ -1796,7 +1796,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-slate-900">
                 <Info size={20} className="text-blue-600" />
                 Special Situations (Active Room)
               </h3>
@@ -1961,7 +1961,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
-              <h3 className="text-lg font-semibold mb-4">{ui.paintRequired}</h3>
+              <h3 className="text-lg font-semibold mb-4 text-slate-900">{ui.paintRequired}</h3>
               <div className="space-y-3">
                 {any.walls && (
                   <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
@@ -2022,7 +2022,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
-              <h3 className="text-lg font-semibold mb-4">{ui.costBreakdown}</h3>
+              <h3 className="text-lg font-semibold mb-4 text-slate-900">{ui.costBreakdown}</h3>
               <div className="space-y-2">
                 <div className="text-xs text-gray-500">{ui.paintBySurface}</div>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
@@ -2088,7 +2088,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.45)] p-6 print:shadow-none print:rounded-none print:border">
-              <h3 className="text-lg font-semibold mb-4">Shopping List</h3>
+              <h3 className="text-lg font-semibold mb-4 text-slate-900">Shopping List</h3>
               <div className="space-y-2 text-sm">
                 {any.walls && (
                   <div className="flex items-start gap-2">

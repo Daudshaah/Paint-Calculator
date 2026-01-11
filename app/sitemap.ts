@@ -1,9 +1,24 @@
 import type { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
 import fs from 'fs';
 import path from 'path';
 import { locales, defaultLocale } from '@/i18n/config';
 
 const PAGE_FILE_REGEX = /^page\.(tsx|ts|jsx|js|mdx)$/;
+
+function getSiteUrl() {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '');
+  const headersList = headers();
+  const host = headersList.get('x-forwarded-host') ?? headersList.get('host');
+  const proto = headersList.get('x-forwarded-proto') ?? 'https';
+  const requestUrl = host ? `${proto}://${host}` : '';
+
+  if (envUrl && (!requestUrl || !envUrl.includes('localhost'))) {
+    return envUrl;
+  }
+
+  return requestUrl || envUrl || 'http://localhost:3000';
+}
 
 function collectStaticRoutes() {
   const root = path.join(process.cwd(), 'app', '[locale]');
@@ -37,7 +52,7 @@ function collectStaticRoutes() {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '');
+  const siteUrl = getSiteUrl();
   const routes = collectStaticRoutes();
   const now = new Date();
 
