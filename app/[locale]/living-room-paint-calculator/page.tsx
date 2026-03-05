@@ -171,7 +171,7 @@ export default function LivingRoomPaintCalculator() {
           <p className="text-sm opacity-90">For a standard 16x14 living room with 9ft ceilings — two coats on walls</p>
         </div>
 
-        {ready && <PaintCalculatorClient locale={"en" as any} />}
+        app/[locale]/living-room-paint-calculator/page.tsx
 
         <article className="max-w-3xl mx-auto mt-16">
 
