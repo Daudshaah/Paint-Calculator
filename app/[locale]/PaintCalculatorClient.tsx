@@ -180,17 +180,17 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     measurements: {
       name: `${ui.room} 1`,
       mode: 'dimensions',
-      length: '',
-      width: '',
-      height: '',
+      length: '12',
+      width: '12',
+      height: '8',
       directWallArea: '',
       directCeilingArea: '',
       directPerimeter: '',
       doors: [
-        { id: uid('door'), size: 'standard', quantity: 0, customWidth: '', customHeight: '' },
+        { id: uid('door'), size: 'standard', quantity: 1, customWidth: '', customHeight: '' },
       ],
       windows: [
-        { id: uid('window'), size: 'medium', quantity: 0, customWidth: '', customHeight: '' },
+        { id: uid('window'), size: 'medium', quantity: 2, customWidth: '', customHeight: '' },
       ],
     },
     surfaces: defaultSurfacesByTab[tab],
@@ -208,6 +208,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   });
 
   const printRef = useRef<HTMLDivElement | null>(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [project, setProject] = useState<ProjectState>(() => ({
     activeTab: 'interior',
     unit: 'imperial',
@@ -913,13 +914,17 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
   };
 
   return (
-    <div ref={printRef} className="paint-calculator min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 text-slate-900 print:bg-white print:p-0">
+    <div
+      ref={printRef}
+      className="paint-calculator min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 text-slate-900 print:bg-white print:p-0"
+      onChangeCapture={() => setHasInteracted(true)}
+    >
       <div className="max-w-7xl mx-auto print:max-w-none">
         <div className="mb-6 print:hidden">
           <div className="relative rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-visible">
             <div className="flex flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-1">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Free Paint Calculator</h1>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Free Paint Calculator</h2>
               <p className="text-sm text-gray-600">{ui.heroSubtitle}</p>
             </div>
 
@@ -1117,7 +1122,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
                 {ui.measurementsTitle}
               </h3>
 
-              {(validation.projectIssues.length > 0 || activeRoomMessages.length > 0) && (
+              {hasInteracted && (validation.projectIssues.length > 0 || activeRoomMessages.length > 0) && (
                 <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
                   <div className="font-semibold mb-1">{ui.errorsTitle}</div>
                   <ul className="list-disc pl-5 space-y-1">
