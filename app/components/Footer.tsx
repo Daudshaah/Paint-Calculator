@@ -65,14 +65,14 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <footer className="bg-white border-t border-gray-200 mt-12">
       <div className="max-w-7xl mx-auto px-4 py-10 space-y-8">
-        {/* Main footer rows */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-          {/* About */}
-          <div className="md:col-span-2">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+
+        {/* About section — full width on top */}
+        <div className="pb-6 border-b border-gray-100">
+          <div className="max-w-xl">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
               {t.footer.aboutTitle}
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 mb-3">
               {t.footer.aboutText}
             </p>
             <div className="flex items-center gap-3 text-sm text-gray-500">
@@ -81,6 +81,10 @@ export default function Footer({ locale }: FooterProps) {
               <span>{t.footer.available}</span>
             </div>
           </div>
+        </div>
+
+        {/* 4 column grid — Calculators, Guides, Blog, Company */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
 
           {/* Calculators */}
           <div>
@@ -181,6 +185,7 @@ export default function Footer({ locale }: FooterProps) {
               ))}
             </ul>
           </div>
+
         </div>
 
         {/* Location strip */}
@@ -199,45 +204,34 @@ export default function Footer({ locale }: FooterProps) {
               </span>
             ))}
             <span className="text-gray-300">|</span>
-            <Link
-              href={`/${locale}`}
-              className="hover:text-blue-600"
-            >
+            <Link href={`/${locale}`} className="hover:text-blue-600">
               View All States →
             </Link>
           </div>
         </div>
 
         {/* Copyright bar */}
-        <div className="border-t border-gray-200 pt-4 mt-2">
+        <div className="border-t border-gray-200 pt-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-500">
             <p>
               {t.footer.copyright.replace('{year}', currentYear.toString())}
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href={makeHref('privacy')}
-                className="hover:text-blue-600"
-              >
+              <Link href={makeHref('privacy')} className="hover:text-blue-600">
                 Privacy Policy
               </Link>
               <span className="text-gray-300">|</span>
-              <Link
-                href={makeHref('write-for-us')}
-                className="hover:text-blue-600"
-              >
+              <Link href={makeHref('write-for-us')} className="hover:text-blue-600">
                 Write for Us
               </Link>
               <span className="text-gray-300">|</span>
-              <Link
-                href={makeHref('terms')}
-                className="hover:text-blue-600"
-              >
+              <Link href={makeHref('terms')} className="hover:text-blue-600">
                 Terms of Service
               </Link>
             </div>
           </div>
         </div>
+
       </div>
     </footer>
   );
