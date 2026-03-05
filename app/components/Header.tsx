@@ -36,9 +36,9 @@ export default function Header({ locale }: HeaderProps) {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight group-hover:text-blue-700 transition-colors">
+                <span className="text-xl font-bold text-gray-900 dark:text-white leading-tight group-hover:text-blue-700 transition-colors">
                   {t.header.title}
-                </h1>
+                </span>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   {t.header.tagline}
                 </p>

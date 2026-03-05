@@ -6,9 +6,9 @@ import { locales, defaultLocale } from '@/i18n/config';
 
 const PAGE_FILE_REGEX = /^page\.(tsx|ts|jsx|js|mdx)$/;
 
-function getSiteUrl() {
+async function getSiteUrl() {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '');
-  const headersList = headers();
+  const headersList = await headers();
   const host = headersList.get('x-forwarded-host') ?? headersList.get('host');
   const proto = headersList.get('x-forwarded-proto') ?? 'https';
   const requestUrl = host ? `${proto}://${host}` : '';
@@ -51,8 +51,8 @@ function collectStaticRoutes() {
   return Array.from(seen);
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = getSiteUrl();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const siteUrl = await getSiteUrl();
   const routes = collectStaticRoutes();
   const now = new Date();
 

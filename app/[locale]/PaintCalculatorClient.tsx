@@ -828,15 +828,15 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
     });
 
   const getHtml2Canvas = async () => {
-    if ((window as any).html2canvas) return (window as any).html2canvas as typeof import('html2canvas');
+    if ((window as any).html2canvas) return (window as any).html2canvas as any;
     await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
-    return (window as any).html2canvas as typeof import('html2canvas');
+    return (window as any).html2canvas as any;
   };
 
   const getJsPDF = async () => {
-    if ((window as any).jspdf?.jsPDF) return (window as any).jspdf.jsPDF as typeof import('jspdf').jsPDF;
+    if ((window as any).jspdf?.jsPDF) return (window as any).jspdf.jsPDF as any;
     await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js');
-    return (window as any).jspdf.jsPDF as typeof import('jspdf').jsPDF;
+    return (window as any).jspdf.jsPDF as any;
   };
 
   const handleShare = async () => {
@@ -919,7 +919,7 @@ export default function PaintCalculatorClient({ locale: _locale }: PaintCalculat
           <div className="relative rounded-2xl bg-white/95 backdrop-blur shadow-xl border border-blue-100 overflow-visible">
             <div className="flex flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-1">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{ui.heroTitle}</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Free Paint Calculator</h1>
               <p className="text-sm text-gray-600">{ui.heroSubtitle}</p>
             </div>
 

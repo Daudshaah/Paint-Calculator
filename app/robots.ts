@@ -1,9 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
 
-function getSiteUrl() {
+async function getSiteUrl() {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '');
-  const headersList = headers();
+  const headersList = await headers();
   const host = headersList.get('x-forwarded-host') ?? headersList.get('host');
   const proto = headersList.get('x-forwarded-proto') ?? 'https';
   const requestUrl = host ? `${proto}://${host}` : '';
@@ -15,8 +15,8 @@ function getSiteUrl() {
   return requestUrl || envUrl || 'http://localhost:3000';
 }
 
-export default function robots(): MetadataRoute.Robots {
-  const siteUrl = getSiteUrl();
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const siteUrl = await getSiteUrl();
 
   return {
     rules: {
