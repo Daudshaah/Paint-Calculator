@@ -21,7 +21,7 @@ export async function generateMetadata({
       : `https://thepaintcalculator.com/${locale}/living-room-paint-calculator`;
   return {
     title: 'Living Room Paint Calculator — How Much Paint for a Living Room? | ThePaintCalculator.com',
-    description: 'Calculate exactly how much paint you need for your living room. Pre-filled for a standard 16x14 living room. Free instant results in gallons or litres. No signup.',
+    description: 'Calculate exactly how much paint you need for your living room. Free instant results in gallons or litres. No signup required.',
     alternates: { canonical },
     openGraph: {
       title: 'Living Room Paint Calculator — How Much Paint for a Living Room?',
@@ -62,7 +62,7 @@ export default async function LivingRoomPaintCalculator({
       {
         '@type': 'Question',
         name: 'What paint finish is best for a living room?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Eggshell is the best finish for living rooms. It has a soft low-sheen look that hides wall imperfections, is washable, and holds up to everyday use. Satin is a good alternative for high-traffic living rooms.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Eggshell is the best finish for living rooms. It has a soft low-sheen look that hides wall imperfections, is washable, and holds up to everyday use.' },
       },
       {
         '@type': 'Question',
@@ -72,17 +72,17 @@ export default async function LivingRoomPaintCalculator({
       {
         '@type': 'Question',
         name: 'How many litres of paint for a living room?',
-        acceptedAnswer: { '@type': 'Answer', text: 'A standard living room needs 8 to 11 litres of paint for two coats on the walls. Buy two 5 litre tins for most living rooms. A large open-plan space may need three 5 litre tins.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'A standard living room needs 8 to 11 litres of paint for two coats on the walls. Buy two 5 litre tins for most living rooms.' },
       },
       {
         '@type': 'Question',
         name: 'Should I paint the living room ceiling the same colour as walls?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Most living rooms have white or off-white ceilings which create contrast and make the room feel taller. Matching ceiling and walls works well in rooms with very high ceilings and creates a cocooning effect.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Most living rooms have white or off-white ceilings which create contrast and make the room feel taller. Matching ceiling and walls works well in rooms with very high ceilings.' },
       },
       {
         '@type': 'Question',
         name: 'How long does it take to paint a living room?',
-        acceptedAnswer: { '@type': 'Answer', text: 'A standard living room takes 6 to 8 hours to paint with two coats including prep and drying time. A large living room may take a full day. Move all furniture to the centre before starting.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'A standard living room takes 6 to 8 hours to paint with two coats including prep and drying time. A large living room may take a full day.' },
       },
     ],
   };
@@ -107,7 +107,7 @@ export default async function LivingRoomPaintCalculator({
             Living Room Paint Calculator
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
-            Most living rooms need <strong>2 to 3 gallons</strong> (8 to 11 litres) of paint for two coats on the walls. Pre-filled for a standard 16x14 living room with 9ft ceilings — adjust for your size. Free, no signup required.
+            Most living rooms need <strong>2 to 3 gallons</strong> (8 to 11 litres) of paint for two coats on the walls. Enter your room dimensions below for an exact result. Free, no signup required.
           </p>
         </div>
 
@@ -132,7 +132,7 @@ export default async function LivingRoomPaintCalculator({
             Living rooms are typically the largest room in a home which means they need more paint than bedrooms or bathrooms. A standard 16x14 living room has approximately 540 square feet of gross wall area with 9ft ceilings. After deducting one door and two large windows, the paintable area is around 460 square feet. At 400 square feet per gallon with two coats, that equals about 2.3 gallons.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Most homeowners buy 3 gallons for a standard living room — giving enough for two full coats plus extra for touch-ups. An open-plan living and dining room measuring 20x18 or larger will need 4 to 5 gallons for two coats. Use the calculator above and enter your exact dimensions for a precise estimate.
+            Most homeowners buy 3 gallons for a standard living room — giving enough for two full coats plus extra for touch-ups. An open-plan living and dining room measuring 20x18 or larger will need 4 to 5 gallons for two coats.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4">
             In litres, a standard living room needs 8 to 11 litres for two coats. Two 5 litre tins is the standard purchase for most living rooms. A large open-plan space may need three 5 litre tins.
@@ -170,26 +170,19 @@ export default async function LivingRoomPaintCalculator({
 
           <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Best Paint Finish for a Living Room</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Eggshell is the most popular finish for living rooms. It has a soft low-sheen appearance that looks elegant, hides minor wall imperfections, and is washable for everyday family life. Most interior designers specify eggshell as the default for living room walls.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Satin is a good alternative if your living room gets heavy use or has children and pets. Avoid flat paint in living rooms unless you have perfectly smooth walls — flat paint marks easily and cannot be scrubbed.
+            Eggshell is the most popular finish for living rooms. It has a soft low-sheen appearance that looks elegant, hides minor wall imperfections, and is washable for everyday family life. Satin is a good alternative if your living room gets heavy use or has children and pets.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Best Paint Colours for a Living Room in 2026</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Living room colour trends in 2026 lean toward warm earthy tones, soft greens, and deep moody blues. <strong>Sherwin-Williams Agreeable Gray (SW 7029)</strong> remains the most popular living room colour in the US. <strong>Benjamin Moore Pale Oak (OC-20)</strong> is a warm beige that feels sophisticated and pairs well with natural materials. <strong>Farrow & Ball Mizzle (No.266)</strong> is a muted sage green that suits both modern and traditional living rooms.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            For accent walls, <strong>Sherwin-Williams Cyberspace (SW 7076)</strong> and <strong>Benjamin Moore Black Forest Green (2047-10)</strong> are trending as bold statement colours behind sofas and media walls.
+            <strong>Sherwin-Williams Agreeable Gray (SW 7029)</strong> remains the most popular living room colour in the US. <strong>Benjamin Moore Pale Oak (OC-20)</strong> is a warm beige that pairs well with natural materials. <strong>Farrow & Ball Mizzle (No.266)</strong> is a muted sage green that suits both modern and traditional living rooms.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Tips for Painting a Living Room</h2>
-          <p className="text-gray-700 leading-relaxed mb-2"><strong>Move all furniture to the centre first.</strong> Living rooms have the most furniture of any room — plan at least 30 minutes for prep before opening any paint.</p>
-          <p className="text-gray-700 leading-relaxed mb-2"><strong>Paint an accent wall first.</strong> If doing an accent wall in a different colour, paint it first and let it dry fully before cutting in adjacent wall colours.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Move all furniture to the centre first.</strong> Plan at least 30 minutes for prep before opening any paint.</p>
           <p className="text-gray-700 leading-relaxed mb-2"><strong>Use a 9-inch roller with half-inch nap.</strong> Living rooms have large flat walls where a wide roller saves significant time.</p>
-          <p className="text-gray-700 leading-relaxed mb-2"><strong>Cut in before rolling.</strong> Use a 2.5-inch angled brush to cut in all edges and corners before rolling the main wall areas.</p>
-          <p className="text-gray-700 leading-relaxed mb-4"><strong>Check colour in natural and artificial light.</strong> Always test a large patch and check it at different times of day before committing to the full room.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Cut in before rolling.</strong> Use a 2.5-inch angled brush to cut in all edges and corners before rolling.</p>
+          <p className="text-gray-700 leading-relaxed mb-4"><strong>Check colour in natural and artificial light.</strong> Test a large patch at different times of day before committing to the full room.</p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Paint Calculators</h2>
           <ul className="space-y-2 mb-8">
@@ -204,12 +197,12 @@ export default async function LivingRoomPaintCalculator({
           <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-8">Frequently Asked Questions</h2>
           <div className="space-y-6">
             {[
-              ['How much paint do I need for a living room?', 'Most living rooms need 2 to 3 gallons for two coats on the walls. A standard 16x14 living room needs about 2.3 gallons. Use the calculator above and enter your exact dimensions for a precise estimate.'],
-              ['What paint finish is best for a living room?', 'Eggshell is the best finish for most living rooms. It looks elegant, hides wall imperfections, and is washable. Satin is a good alternative for high-traffic living rooms with children or pets.'],
-              ['How many gallons for a large living room?', 'A large living room measuring 18x20 or bigger needs 3 to 4 gallons for two coats. Add another 1 to 1.5 gallons if you are also painting the ceiling.'],
+              ['How much paint do I need for a living room?', 'Most living rooms need 2 to 3 gallons for two coats on the walls. A standard 16x14 living room needs about 2.3 gallons. Use the calculator above for a precise estimate.'],
+              ['What paint finish is best for a living room?', 'Eggshell is the best finish for most living rooms. It looks elegant, hides wall imperfections, and is washable. Satin is a good alternative for high-traffic rooms.'],
+              ['How many gallons for a large living room?', 'A large living room measuring 18x20 or bigger needs 3 to 4 gallons for two coats. Add another 1 to 1.5 gallons if also painting the ceiling.'],
               ['How many litres of paint for a living room?', 'A standard living room needs 8 to 11 litres for two coats. Two 5 litre tins covers most living rooms. A large open-plan space may need three 5 litre tins.'],
-              ['Should I paint the living room ceiling the same colour as walls?', 'Most living rooms have white or off-white ceilings which create contrast and make the room feel taller. Matching ceiling and walls works well in rooms with very high ceilings.'],
-              ['How long does it take to paint a living room?', 'A standard living room takes 6 to 8 hours with two coats including prep and drying time. A large living room may take a full day. Move all furniture to the centre before starting.'],
+              ['Should I paint the living room ceiling the same colour as walls?', 'Most living rooms have white or off-white ceilings which make the room feel taller. Matching ceiling and walls works well in rooms with very high ceilings.'],
+              ['How long does it take to paint a living room?', 'A standard living room takes 6 to 8 hours with two coats including prep and drying time. A large living room may take a full day.'],
             ].map(([q, a]) => (
               <div key={q}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{q}</h3>
