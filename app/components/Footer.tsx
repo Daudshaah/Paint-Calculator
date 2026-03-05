@@ -10,127 +10,230 @@ export default function Footer({ locale }: FooterProps) {
   const t = getTranslations(locale);
   const currentYear = new Date().getFullYear();
 
+  const makeHref = (slug: string) => `/${locale}/${slug}`;
+
+  const calculators = [
+    { label: 'Bedroom Calculator', slug: 'bedroom-paint-calculator' },
+    { label: 'Bathroom Calculator', slug: 'bathroom-paint-calculator' },
+    { label: 'Kitchen Calculator', slug: 'kitchen-paint-calculator' },
+    { label: 'Exterior Calculator', slug: 'exterior-paint-calculator' },
+    { label: 'Whole House Calculator', slug: 'whole-house-paint-calculator' },
+    { label: 'Primer Calculator', slug: 'primer-calculator' },
+    { label: 'Paint Cost Calculator', slug: 'paint-cost-calculator' },
+  ];
+
+  const guides = [
+    { label: 'How Much Paint 10x10', slug: 'how-much-paint-for-10x10-room' },
+    { label: 'How Much Paint Bedroom', slug: 'how-much-paint-for-bedroom' },
+    { label: 'How Many Coats', slug: 'how-many-coats-of-paint' },
+    { label: 'Do I Need Primer', slug: 'do-i-need-primer-before-painting' },
+    { label: 'Cost to Paint a Room', slug: 'how-much-does-it-cost-to-paint-a-room' },
+    { label: 'Paint Finish Guide', slug: 'paint-finish-guide' },
+  ];
+
+  const blog = [
+    { label: 'Best Paint Brands', slug: 'blog/best-paint-brands' },
+    { label: 'Paint Finish Guide', slug: 'blog/paint-finish-guide' },
+    { label: 'Bedroom Color Ideas', slug: 'blog/bedroom-paint-color-ideas' },
+    { label: 'How to Prep Walls', slug: 'blog/how-to-prep-walls-for-painting' },
+    { label: 'Exterior Color Trends', slug: 'blog/exterior-paint-color-trends' },
+    { label: 'DIY Painting Guides', slug: 'blog/category/diy' },
+  ];
+
+  const company = [
+    { label: 'About Us', slug: 'about' },
+    { label: 'How It Works', slug: 'how-it-works' },
+    { label: 'Help', slug: 'help' },
+    { label: 'FAQ', slug: 'faq' },
+    { label: 'Write for Us', slug: 'write-for-us' },
+    { label: 'Contact Us', slug: 'contact' },
+    { label: 'Privacy Policy', slug: 'privacy' },
+    { label: 'Terms of Service', slug: 'terms' },
+  ];
+
+  const locations = [
+    { label: 'Texas', slug: 'paint-calculator-texas' },
+    { label: 'California', slug: 'paint-calculator-california' },
+    { label: 'Florida', slug: 'paint-calculator-florida' },
+    { label: 'New York', slug: 'paint-calculator-new-york' },
+    { label: 'Georgia', slug: 'paint-calculator-georgia' },
+    { label: 'Arizona', slug: 'paint-calculator-arizona' },
+    { label: 'Illinois', slug: 'paint-calculator-illinois' },
+    { label: 'Ohio', slug: 'paint-calculator-ohio' },
+  ];
+
   return (
-    <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12">
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About Section */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <footer className="bg-white border-t border-gray-200 mt-12">
+      <div className="max-w-7xl mx-auto px-4 py-10 space-y-8">
+        {/* Main footer rows */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+          {/* About */}
+          <div className="md:col-span-2">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
               {t.footer.aboutTitle}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-600 mb-4">
               {t.footer.aboutText}
             </p>
+            <div className="flex items-center gap-3 text-sm text-gray-500">
+              <span>{t.footer.supportEmail}</span>
+              <span className="h-1 w-1 rounded-full bg-gray-300" />
+              <span>{t.footer.available}</span>
+            </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Calculators */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              {t.footer.quickLinks}
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+              Calculators
             </h3>
-            <ul className="space-y-2">
-              <li>
+            <ul className="space-y-1.5 text-sm text-gray-600">
+              {calculators.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={makeHref(item.slug)}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2">
                 <Link
-                  href={`/${locale}/how-it-works`}
-                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  href={`/${locale}`}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
                 >
-                  How It Works
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/tips-and-tricks`}
-                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  {t.footer.tips}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/faq`}
-                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  {t.footer.faq}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/contact`}
-                  className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  {t.footer.contactUs}
+                  View All →
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Guides */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              {t.footer.getInTouch}
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+              Guides
             </h3>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li className="flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            <ul className="space-y-1.5 text-sm text-gray-600">
+              {guides.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={makeHref(item.slug)}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2">
+                <Link
+                  href={makeHref('how-it-works')}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                {t.footer.supportEmail}
+                  View All →
+                </Link>
               </li>
-              <li className="flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            </ul>
+          </div>
+
+          {/* Blog */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+              Blog
+            </h3>
+            <ul className="space-y-1.5 text-sm text-gray-600">
+              {blog.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={makeHref(item.slug)}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2">
+                <Link
+                  href={makeHref('blog')}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                {t.footer.available}
+                  View All Posts →
+                </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+              Company
+            </h3>
+            <ul className="space-y-1.5 text-sm text-gray-600">
+              {company.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={makeHref(item.slug)}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+        {/* Location strip */}
+        <div className="border-t border-gray-200 pt-4">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+            <span className="font-medium text-gray-600">Popular locations:</span>
+            {locations.map((loc, idx) => (
+              <span key={loc.slug} className="flex items-center gap-2">
+                {idx > 0 && <span className="text-gray-300">|</span>}
+                <Link
+                  href={makeHref(loc.slug)}
+                  className="hover:text-blue-600"
+                >
+                  {loc.label}
+                </Link>
+              </span>
+            ))}
+            <span className="text-gray-300">|</span>
+            <Link
+              href={`/${locale}`}
+              className="hover:text-blue-600"
+            >
+              View All States →
+            </Link>
+          </div>
+        </div>
+
+        {/* Copyright bar */}
+        <div className="border-t border-gray-200 pt-4 mt-2">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-500">
+            <p>
               {t.footer.copyright.replace('{year}', currentYear.toString())}
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <Link
-                href={`/${locale}/privacy`}
-                className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                href={makeHref('privacy')}
+                className="hover:text-blue-600"
               >
-                {t.footer.privacy}
+                Privacy Policy
               </Link>
+              <span className="text-gray-300">|</span>
               <Link
-                href={`/${locale}/write-for-us`}
-                className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                href={makeHref('write-for-us')}
+                className="hover:text-blue-600"
               >
                 Write for Us
               </Link>
+              <span className="text-gray-300">|</span>
               <Link
-                href={`/${locale}/terms`}
-                className="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                href={makeHref('terms')}
+                className="hover:text-blue-600"
               >
-                {t.footer.terms}
+                Terms of Service
               </Link>
             </div>
           </div>
@@ -139,4 +242,3 @@ export default function Footer({ locale }: FooterProps) {
     </footer>
   );
 }
-
