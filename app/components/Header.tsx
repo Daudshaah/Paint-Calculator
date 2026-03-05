@@ -112,104 +112,75 @@ export default function Header({ locale }: HeaderProps) {
 
   const makeHref = (slug: string) => `/${locale}/${slug}`;
 
-  const dropdownPanelBase =
-    'invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 ease-out pointer-events-none group-hover:pointer-events-auto';
-
   return (
     <header className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
+        
+        {/* Logo */}
         <Link
           href="https://thepaintcalculator.com"
           className="flex items-center gap-3 shrink-0 group"
           aria-label="Paint Calculator homepage"
         >
           <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
-            <svg
-              className="w-6 h-6 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-              />
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
             </svg>
           </div>
           <div>
             <span className="text-xl font-bold text-gray-900 leading-tight group-hover:text-blue-700 transition-colors">
               {t.header.title}
             </span>
-            <p className="text-xs text-gray-500">
-              {t.header.tagline}
-            </p>
+            <p className="text-xs text-gray-500">{t.header.tagline}</p>
           </div>
         </Link>
 
         {/* Desktop navigation */}
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700">
-          {/* Calculators */}
+
+          {/* Calculators dropdown */}
           <div className="relative group">
             <button
               type="button"
-              className="inline-flex items-center gap-1 hover:text-blue-600 transition-colors"
+              className="inline-flex items-center gap-1 hover:text-blue-600 transition-colors py-2"
             >
               <span>Calculators</span>
               <span className="text-xs">▾</span>
             </button>
-            <div
-              className={`${dropdownPanelBase} absolute left-1/2 -translate-x-1/2 top-full mt-3 w-screen max-w-5xl`}
-            >
-              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Invisible bridge fills gap between button and panel */}
+            <div className="absolute top-full left-0 h-3 w-full" />
+            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 ease-out absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] w-screen max-w-5xl pointer-events-none group-hover:pointer-events-auto">
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 px-8 grid grid-cols-3 gap-8">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    By Room
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">By Room</div>
                   <ul>
                     {calculatorsByRoom.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
-
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Specialty
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Specialty</div>
                   <ul>
                     {calculatorsSpecialty.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
-
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Commercial
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Commercial</div>
                   <ul>
                     {calculatorsCommercial.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -220,30 +191,25 @@ export default function Header({ locale }: HeaderProps) {
             </div>
           </div>
 
-          {/* Guides */}
+          {/* Guides dropdown */}
           <div className="relative group">
             <button
               type="button"
-              className="inline-flex items-center gap-1 hover:text-blue-600 transition-colors"
+              className="inline-flex items-center gap-1 hover:text-blue-600 transition-colors py-2"
             >
               <span>Guides</span>
               <span className="text-xs">▾</span>
             </button>
-            <div
-              className={`${dropdownPanelBase} absolute left-1/2 -translate-x-1/2 top-full mt-3 w-screen max-w-5xl`}
-            >
-              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Invisible bridge */}
+            <div className="absolute top-full left-0 h-3 w-full" />
+            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 ease-out absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] w-screen max-w-5xl pointer-events-none group-hover:pointer-events-auto">
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 px-8 grid grid-cols-3 gap-8">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    How Much Paint
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">How Much Paint</div>
                   <ul>
                     {guidesHowMuchPaint.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -251,16 +217,11 @@ export default function Header({ locale }: HeaderProps) {
                   </ul>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    How To Guides
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">How To Guides</div>
                   <ul>
                     {guidesHowTo.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -268,16 +229,11 @@ export default function Header({ locale }: HeaderProps) {
                   </ul>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Cost Guides
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Cost Guides</div>
                   <ul>
                     {guidesCost.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -288,30 +244,25 @@ export default function Header({ locale }: HeaderProps) {
             </div>
           </div>
 
-          {/* Blog */}
+          {/* Blog dropdown */}
           <div className="relative group">
             <button
               type="button"
-              className="inline-flex items-center gap-1 hover:text-blue-600 transition-colors"
+              className="inline-flex items-center gap-1 hover:text-blue-600 transition-colors py-2"
             >
               <span>Blog</span>
               <span className="text-xs">▾</span>
             </button>
-            <div
-              className={`${dropdownPanelBase} absolute left-1/2 -translate-x-1/2 top-full mt-3 w-screen max-w-5xl`}
-            >
-              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Invisible bridge */}
+            <div className="absolute top-full left-0 h-3 w-full" />
+            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 ease-out absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] w-screen max-w-5xl pointer-events-none group-hover:pointer-events-auto">
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 px-8 grid grid-cols-3 gap-8">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Paint Tips
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Paint Tips</div>
                   <ul>
                     {blogPaintTips.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -319,16 +270,11 @@ export default function Header({ locale }: HeaderProps) {
                   </ul>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Project Ideas
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Project Ideas</div>
                   <ul>
                     {blogProjectIdeas.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -336,16 +282,11 @@ export default function Header({ locale }: HeaderProps) {
                   </ul>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Quick Links
-                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Quick Links</div>
                   <ul>
                     {blogQuickLinks.map((item) => (
                       <li key={item.slug}>
-                        <Link
-                          href={makeHref(item.slug)}
-                          className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={makeHref(item.slug)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 transition-colors">
                           {item.label}
                         </Link>
                       </li>
@@ -356,23 +297,19 @@ export default function Header({ locale }: HeaderProps) {
             </div>
           </div>
 
-          <Link
-            href={`/${locale}/how-it-works`}
-            className="hover:text-blue-600 transition-colors"
-          >
+          <Link href={`/${locale}/how-it-works`} className="hover:text-blue-600 transition-colors">
             How It Works
           </Link>
 
-          <div className="flex items-center gap-2">
-            <LanguageSwitcher />
-          </div>
+          <LanguageSwitcher />
         </nav>
 
-        {/* Mobile navigation */}
+        {/* Mobile */}
         <div className="lg:hidden flex items-center gap-3">
           <LanguageSwitcher />
           <MobileMenu locale={locale} />
         </div>
+
       </div>
     </header>
   );
