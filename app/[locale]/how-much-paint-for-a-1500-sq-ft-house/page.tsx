@@ -8,206 +8,161 @@ function isValidLocale(locale: string): locale is Locale {
   return locales.includes(locale as Locale);
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
-  const canonical = `https://www.thepaintcalculator.com/${locale}/how-much-paint-for-a-1500-sq-ft-house`;
+  const canonical =
+    locale === defaultLocale
+      ? 'https://thepaintcalculator.com/how-much-paint-for-a-1500-sq-ft-house'
+      : `https://thepaintcalculator.com/${locale}/how-much-paint-for-a-1500-sq-ft-house`;
   return {
-    title: 'How Much Paint for a 1500 Sq Ft House? | The Paint Calculator',
-    description: 'How much paint for a 1500 sq ft house? Get interior and exterior gallon estimates for a complete house painting project.',
+    title: 'How Much Paint for a 1500 Sq Ft House? | ThePaintCalculator.com',
+    description: 'Calculate exactly how much paint you need for a 1500 sq ft house. Interior and exterior estimates in gallons and litres.',
     alternates: { canonical },
     openGraph: {
       title: 'How Much Paint for a 1500 Sq Ft House?',
-      description: 'How much paint for a 1500 sq ft house? Get interior and exterior gallon estimates for a complete house painting project.',
+      description: 'Calculate exactly how much paint you need for a 1500 sq ft house. Interior and exterior estimates in gallons and litres.',
       url: canonical,
-      siteName: 'The Paint Calculator',
+      siteName: 'ThePaintCalculator.com',
       type: 'article',
     },
   };
 }
 
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
 
-  const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How many gallons to paint a 1500 sq ft house interior?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You need 9-12 gallons for walls plus 4-5 gallons for ceilings and 2 gallons for trim - about 15-19 gallons total for the full interior."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much does it cost to paint a 1500 sq ft house?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Paint alone costs $300-$700 for the interior. Professional painters charge $1,500-$4,000 for a full interior paint job on a 1500 sq ft home."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does it take to paint a 1500 sq ft house?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A DIYer working alone should plan 5-7 days. A pair of painters can complete it in 3-4 days with proper prep and drying time."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much paint for the exterior of a 1500 sq ft house?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Exterior painting requires 7-10 gallons for two coats, depending on siding type. Add 1-2 gallons for fascia and trim."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I hire a painter or DIY a 1500 sq ft house?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "DIY saves 60-70% on cost. However, hiring professionals delivers faster results and includes prep, which is often the most labour-intensive step."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What type of paint is best for a whole house?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Use a quality latex paint with a built-in primer. Match the finish to each area: flat for ceilings, eggshell for living areas, satin for kitchens/baths, semi-gloss for trim."
-      }
-    }
-  ]
-};
+  const breadcrumbSchema = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thepaintcalculator.com"},{"@type":"ListItem","position":2,"name":"How Much Paint for a 1500 Sq Ft House?","item":"https://thepaintcalculator.com/how-much-paint-for-a-1500-sq-ft-house"}]};
+  const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many gallons to paint a 1500 sq ft house interior?","acceptedAnswer":{"@type":"Answer","text":"Budget 9 to 12 gallons for walls, 4 to 5 gallons for ceilings, and 2 gallons for trim — about 15 to 19 gallons total for the complete interior."}},{"@type":"Question","name":"How much does it cost to paint a 1500 sq ft house?","acceptedAnswer":{"@type":"Answer","text":"Paint alone costs $300 to $700 for the interior. Professional painters charge $1,500 to $4,000 for a full interior paint job on a 1500 sq ft home."}},{"@type":"Question","name":"How long does it take to paint a 1500 sq ft house?","acceptedAnswer":{"@type":"Answer","text":"Working solo, plan 5 to 7 days. Two painters working together can complete it in 3 to 4 days with proper drying time between coats."}},{"@type":"Question","name":"How much paint for the exterior of a 1500 sq ft house?","acceptedAnswer":{"@type":"Answer","text":"Budget 7 to 10 gallons for two coats on exterior siding, plus 1 to 2 gallons for fascia and trim."}},{"@type":"Question","name":"Should I hire or DIY a 1500 sq ft house?","acceptedAnswer":{"@type":"Answer","text":"DIY saves 60 to 70% on cost. However, professionals include all prep work, which is typically the most time-consuming part of any paint job."}},{"@type":"Question","name":"What type of paint for a whole 1500 sq ft house?","acceptedAnswer":{"@type":"Answer","text":"Quality latex with built-in primer for walls. Flat white for ceilings, eggshell for living areas and bedrooms, satin for kitchens and bathrooms, semi-gloss for all trim."}}]};
 
   return (
-    <main className="min-h-screen bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Breadcrumb */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+
         <nav className="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-          <ol className="flex flex-wrap gap-1 items-center">
-            <li><Link href={`/${locale}`} className="hover:text-blue-600">Home</Link></li>
-            <li className="mx-1">/</li>
-            <li className="text-gray-800 font-medium">How Much Paint for a 1500 Sq Ft House?</li>
+          <ol className="flex items-center gap-2">
+            <li><Link href={`/${locale}`} className="hover:text-blue-600 transition-colors">Home</Link></li>
+            <li className="text-gray-300">/</li>
+            <li className="text-gray-700 font-medium">How Much Paint for a 1500 Sq Ft House?</li>
           </ol>
         </nav>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How Much Paint for a 1500 Sq Ft House?</h1>
-        <p className="text-lg text-gray-600 mb-6">A 1500 sq ft home is a great candidate for a full DIY paint refresh. Whether you are going room by room or doing the whole house in one push, careful calculation upfront saves multiple trips to the paint store.</p>
-
-        {/* Quick Answer Box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-6">
-          <h2 className="text-lg font-bold text-blue-800 mb-2">Quick Answer</h2>
-          <p className="text-blue-900" dangerouslySetInnerHTML={{ __html: `A 1500 sq ft house needs approximately <strong>9-12 gallons</strong> (34-45 litres) for interior walls with two coats. Add <strong>4-5 gallons</strong> for ceilings and <strong>2 gallons</strong> for trim.` }} />
+        <div className="text-center mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            How Much Paint for a 1500 Sq Ft House?
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: `A 1500 sq ft house needs approximately <strong>9 to 12 gallons</strong> (34 to 45 litres) for interior walls with two coats. Add 4 to 5 gallons for ceilings and 2 gallons for trim.` }}
+          />
         </div>
 
-        {/* Tip Box */}
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
-          <p className="text-amber-800 text-sm"><strong>Pro Tip:</strong> Interior wall area in a 1500 sq ft home is typically 1.5-2x the floor plan area. Use 2x as your multiplier for a rough estimate, then subtract 10-15% for doors, windows, and other openings.</p>
+        <div className="bg-blue-600 text-white rounded-2xl p-6 mb-8 max-w-2xl mx-auto text-center">
+          <p className="text-sm font-semibold uppercase tracking-wider mb-2 opacity-80">Quick Answer</p>
+          <p className="text-2xl font-bold mb-1">9 to 12 gallons interior (34 to 45 litres)</p>
+          <p className="text-sm opacity-90">For interior walls of a 1500 sq ft house — two coats</p>
         </div>
 
-        {/* Calculator */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Paint Calculator</h2>
-          <Suspense fallback={<div className="h-64 bg-gray-100 rounded-lg animate-pulse" />}>
-            <PaintCalculatorClient locale={locale} />
-          </Suspense>
-        </div>
+        <Suspense fallback={
+          <div className="min-h-96 bg-white rounded-2xl flex items-center justify-center">
+            <p className="text-gray-500">Loading calculator...</p>
+          </div>
+        }>
+          <PaintCalculatorClient locale={locale} />
+        </Suspense>
 
-        {/* Reference Table */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Paint Quantity Reference</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse">
+        <article className="max-w-3xl mx-auto mt-16">
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">How Much Paint Does a 1500 Sq Ft House Need?</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">Interior wall area in a 1500 sq ft home is typically 2 to 2.5 times the floor plan area, giving approximately 3,000 to 3,750 sq ft of paintable wall area. At 400 sq ft per gallon and two coats, the walls need 15 to 18.75 gallon-coats — or 7.5 to 9.4 gallons. Rounding up for waste and touch-ups, budget 9 to 12 gallons.</p>
+          <p className="text-gray-700 leading-relaxed mb-4">Add 4 to 5 gallons for ceilings (ceiling area equals floor area, divided by 400 sq ft per gallon, times 2 coats) and 2 gallons for trim. The total interior paint budget for a 1500 sq ft house is 15 to 19 gallons.</p>
+          <p className="text-gray-700 leading-relaxed mb-4">For the exterior, a 1500 sq ft home typically has 1,200 to 1,600 sq ft of paintable siding. Budget 7 to 10 gallons for two coats plus 1 to 2 gallons for exterior trim.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">1500 Sq Ft House Paint — Reference Table</h2>
+          <div className="overflow-x-auto mb-8">
+            <table className="w-full text-sm border-collapse border border-gray-200 rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-50 border-b-2 border-gray-200">
-                  <th className="text-left py-3 pr-4 font-semibold text-gray-700">Scenario</th>
-                  <th className="text-left py-3 pr-4 font-semibold text-gray-700">Gallons</th>
-                  <th className="text-left py-3 font-semibold text-gray-700">Litres</th>
+                <tr className="bg-blue-600 text-white">
+                  <th className="px-4 py-3 text-left font-semibold">Area</th><th className="px-4 py-3 text-left font-semibold">1 Coat</th><th className="px-4 py-3 text-left font-semibold">2 Coats</th><th className="px-4 py-3 text-left font-semibold">Litres (2 coats)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">Interior walls (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">9-12 gallons</td>
-                  <td className="py-2 text-gray-600">34.1-45.4 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">Ceilings (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">4-5 gallons</td>
-                  <td className="py-2 text-gray-600">15.1-18.9 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">Interior trim</td>
-                  <td className="py-2 pr-4 font-medium">2 gallons</td>
-                  <td className="py-2 text-gray-600">7.6 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">Exterior walls (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">7-10 gallons</td>
-                  <td className="py-2 text-gray-600">26.5-37.9 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">Exterior trim</td>
-                  <td className="py-2 pr-4 font-medium">1-2 gallons</td>
-                  <td className="py-2 text-gray-600">3.8-7.6 litres</td>
-                </tr>
+                <tr className={0 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">Interior walls</td><td className="px-4 py-3 text-gray-700">4.5–6 gal</td><td className="px-4 py-3 text-gray-700">9–12 gal</td><td className="px-4 py-3 text-gray-700">34–45 litres</td>
+                  </tr>
+                <tr className={1 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">Ceilings</td><td className="px-4 py-3 text-gray-700">2–2.5 gal</td><td className="px-4 py-3 text-gray-700">4–5 gal</td><td className="px-4 py-3 text-gray-700">15–19 litres</td>
+                  </tr>
+                <tr className={2 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">Interior trim</td><td className="px-4 py-3 text-gray-700">1 gal</td><td className="px-4 py-3 text-gray-700">2 gal</td><td className="px-4 py-3 text-gray-700">7.5 litres</td>
+                  </tr>
+                <tr className={3 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">Exterior walls</td><td className="px-4 py-3 text-gray-700">3.5–5 gal</td><td className="px-4 py-3 text-gray-700">7–10 gal</td><td className="px-4 py-3 text-gray-700">26–38 litres</td>
+                  </tr>
+                <tr className={4 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">Exterior trim</td><td className="px-4 py-3 text-gray-700">0.5–1 gal</td><td className="px-4 py-3 text-gray-700">1–2 gal</td><td className="px-4 py-3 text-gray-700">3.8–7.5 litres</td>
+                  </tr>
               </tbody>
             </table>
           </div>
-        </div>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Tips for Painting a 1500 Sq Ft House</h2>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Buy in 5-gallon buckets</strong> for your main wall colour — they cost 10 to 15% less per gallon than individual gallons and guarantee colour consistency.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Start with the ceilings</strong> throughout the house before any walls — any drips are covered by wall paint.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Use the same colour for multiple rooms</strong> where possible to reduce waste and ensure you can cross-use leftover paint.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>A 1500 sq ft house is a 5 to 7 day DIY project</strong> working solo. Budget accordingly and do not rush drying times.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Label all leftover paint</strong> by room immediately — you will need it for touch-ups.</p>
 
-        {/* FAQs */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <dl className="space-y-5">
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">1. How many gallons to paint a 1500 sq ft house interior?</dt>
-              <dd className="text-gray-700 leading-relaxed">You need 9-12 gallons for walls plus 4-5 gallons for ceilings and 2 gallons for trim - about 15-19 gallons total for the full interior.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">2. How much does it cost to paint a 1500 sq ft house?</dt>
-              <dd className="text-gray-700 leading-relaxed">Paint alone costs $300-$700 for the interior. Professional painters charge $1,500-$4,000 for a full interior paint job on a 1500 sq ft home.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">3. How long does it take to paint a 1500 sq ft house?</dt>
-              <dd className="text-gray-700 leading-relaxed">A DIYer working alone should plan 5-7 days. A pair of painters can complete it in 3-4 days with proper prep and drying time.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">4. How much paint for the exterior of a 1500 sq ft house?</dt>
-              <dd className="text-gray-700 leading-relaxed">Exterior painting requires 7-10 gallons for two coats, depending on siding type. Add 1-2 gallons for fascia and trim.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">5. Should I hire a painter or DIY a 1500 sq ft house?</dt>
-              <dd className="text-gray-700 leading-relaxed">DIY saves 60-70% on cost. However, hiring professionals delivers faster results and includes prep, which is often the most labour-intensive step.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">6. What type of paint is best for a whole house?</dt>
-              <dd className="text-gray-700 leading-relaxed">Use a quality latex paint with a built-in primer. Match the finish to each area: flat for ceilings, eggshell for living areas, satin for kitchens/baths, semi-gloss for trim.</dd>
-            </div>
-          </dl>
-        </div>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Paint Calculators</h2>
+          <ul className="space-y-2 mb-8">
+            <li><Link href={`/${locale}/whole-house-paint-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Whole House Paint Calculator →</Link></li>
+            <li><Link href={`/${locale}/how-much-paint-for-a-2000-sq-ft-house`} className="text-blue-600 hover:text-blue-700 font-medium">How Much Paint for a 2000 Sq Ft House? →</Link></li>
+            <li><Link href={`/${locale}/how-much-paint-for-a-1000-sq-ft-house`} className="text-blue-600 hover:text-blue-700 font-medium">How Much Paint for a 1000 Sq Ft House? →</Link></li>
+            <li><Link href={`/${locale}/how-much-paint-for-interior-of-house`} className="text-blue-600 hover:text-blue-700 font-medium">How Much Paint for Interior of House? →</Link></li>
+            <li><Link href={`/${locale}/paint-cost-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Paint Cost Calculator →</Link></li>
+            <li><Link href={`/${locale}/exterior-paint-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Exterior Paint Calculator →</Link></li>
+            <li><Link href={`/${locale}`} className="text-blue-600 hover:text-blue-700 font-medium">Free Paint Calculator →</Link></li>
+          </ul>
 
-        {/* Related Links */}
-        <div className="border-t border-gray-200 pt-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Related Calculators and Guides</h2>
-          <div className="flex flex-wrap gap-3">
-              <Link href={`/${locale}/whole-house-paint-calculator`} className="text-blue-600 hover:underline text-sm">Whole House Paint Calculator</Link>
-              <Link href={`/${locale}/how-much-paint-for-a-2000-sq-ft-house`} className="text-blue-600 hover:underline text-sm">How Much Paint for a 2000 Sq Ft House?</Link>
-              <Link href={`/${locale}/how-much-paint-for-a-1000-sq-ft-house`} className="text-blue-600 hover:underline text-sm">How Much Paint for a 1000 Sq Ft House?</Link>
-              <Link href={`/${locale}/paint-cost-calculator`} className="text-blue-600 hover:underline text-sm">Paint Cost Calculator</Link>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-8">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+
+            <div key="How many gallons to ">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">How many gallons to paint a 1500 sq ft house interior?</h3>
+              <p className="text-gray-700">Budget 9 to 12 gallons for walls, 4 to 5 gallons for ceilings, and 2 gallons for trim — about 15 to 19 gallons total for the complete interior.</p>
+            </div>
+            <div key="How much does it cos">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">How much does it cost to paint a 1500 sq ft house?</h3>
+              <p className="text-gray-700">Paint alone costs $300 to $700 for the interior. Professional painters charge $1,500 to $4,000 for a full interior paint job on a 1500 sq ft home.</p>
+            </div>
+            <div key="How long does it tak">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">How long does it take to paint a 1500 sq ft house?</h3>
+              <p className="text-gray-700">Working solo, plan 5 to 7 days. Two painters working together can complete it in 3 to 4 days with proper drying time between coats.</p>
+            </div>
+            <div key="How much paint for t">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">How much paint for the exterior of a 1500 sq ft house?</h3>
+              <p className="text-gray-700">Budget 7 to 10 gallons for two coats on exterior siding, plus 1 to 2 gallons for fascia and trim.</p>
+            </div>
+            <div key="Should I hire or DIY">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Should I hire or DIY a 1500 sq ft house?</h3>
+              <p className="text-gray-700">DIY saves 60 to 70% on cost. However, professionals include all prep work, which is typically the most time-consuming part of any paint job.</p>
+            </div>
+            <div key="What type of paint f">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">What type of paint for a whole 1500 sq ft house?</h3>
+              <p className="text-gray-700">Quality latex with built-in primer for walls. Flat white for ceilings, eggshell for living areas and bedrooms, satin for kitchens and bathrooms, semi-gloss for all trim.</p>
+            </div>
           </div>
-        </div>
+
+        </article>
       </div>
     </main>
   );

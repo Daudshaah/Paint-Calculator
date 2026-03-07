@@ -8,206 +8,164 @@ function isValidLocale(locale: string): locale is Locale {
   return locales.includes(locale as Locale);
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
-  const canonical = `https://www.thepaintcalculator.com/${locale}/how-much-paint-for-a-ceiling`;
+  const canonical =
+    locale === defaultLocale
+      ? 'https://thepaintcalculator.com/how-much-paint-for-a-ceiling'
+      : `https://thepaintcalculator.com/${locale}/how-much-paint-for-a-ceiling`;
   return {
-    title: 'How Much Paint for a Ceiling? | The Paint Calculator',
-    description: 'Calculate how much paint you need for a ceiling. Get gallon estimates by room size and tips for getting a streak-free finish overhead.',
+    title: 'How Much Paint for a Ceiling? | ThePaintCalculator.com',
+    description: 'Calculate exactly how much paint you need for a ceiling. Estimates by room size in gallons and litres. Free, no signup required.',
     alternates: { canonical },
     openGraph: {
       title: 'How Much Paint for a Ceiling?',
-      description: 'Calculate how much paint you need for a ceiling. Get gallon estimates by room size and tips for getting a streak-free finish overhead.',
+      description: 'Calculate exactly how much paint you need for a ceiling. Estimates by room size in gallons and litres. Free, no signup required.',
       url: canonical,
-      siteName: 'The Paint Calculator',
+      siteName: 'ThePaintCalculator.com',
       type: 'article',
     },
   };
 }
 
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : defaultLocale;
 
-  const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much ceiling paint do I need per gallon?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "One gallon of ceiling paint covers approximately 350-400 sq ft per coat. For two coats, divide your ceiling area by 200 to get gallons needed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do ceilings need two coats of paint?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, two coats are recommended for even coverage and to hide roller stipple. Some white-on-white repaints may only need one coat."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the best paint for ceilings?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Use flat or matte white ceiling paint. It dries without sheen, which hides imperfections and roller lines that would be visible with glossier finishes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I paint the ceiling before or after walls?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Always paint ceilings first. Any drips or spatters on the walls get covered when you paint the walls afterward."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much paint for a popcorn or textured ceiling?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Textured ceilings absorb 20-30% more paint. Add that amount to your estimate, or use a thick nap roller (3/4 inch) to work paint into the texture."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use wall paint on the ceiling?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can, but ceiling-specific paint is formulated to resist drips and splatter when applied overhead, making the job cleaner and easier."
-      }
-    }
-  ]
-};
+  const breadcrumbSchema = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thepaintcalculator.com"},{"@type":"ListItem","position":2,"name":"How Much Paint for a Ceiling?","item":"https://thepaintcalculator.com/how-much-paint-for-a-ceiling"}]};
+  const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much ceiling paint do I need?","acceptedAnswer":{"@type":"Answer","text":"One gallon of ceiling paint covers 350 to 400 sq ft per coat. For a standard 12x12 ceiling (144 sq ft), one gallon is more than enough for two coats."}},{"@type":"Question","name":"Do I need two coats of ceiling paint?","acceptedAnswer":{"@type":"Answer","text":"Yes — two coats are recommended for even, uniform coverage. Some white-on-white repaints may look fine with one coat, but two coats always produces a more professional result."}},{"@type":"Question","name":"Can I use wall paint on the ceiling?","acceptedAnswer":{"@type":"Answer","text":"You can, but ceiling-specific paint is formulated to resist drips when applied overhead and hides roller marks better. It is worth using the right product for the ceiling."}},{"@type":"Question","name":"How much paint for a textured popcorn ceiling?","acceptedAnswer":{"@type":"Answer","text":"Textured ceilings absorb 20 to 30% more paint. Add 25% to your standard estimate. Use a thick nap roller (3/4 inch) to work paint into the texture."}},{"@type":"Question","name":"Should I paint the ceiling before or after the walls?","acceptedAnswer":{"@type":"Answer","text":"Always paint the ceiling first. Any drips or spatters on the walls will be covered when you paint the walls afterward."}},{"@type":"Question","name":"What colour should I paint my ceiling?","acceptedAnswer":{"@type":"Answer","text":"Flat white is the most common ceiling colour. Painting the ceiling the same colour as the walls creates a cocoon effect popular in dining rooms and bedrooms. A slightly lighter version of the wall colour is a good compromise."}}]};
 
   return (
-    <main className="min-h-screen bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Breadcrumb */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+
         <nav className="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-          <ol className="flex flex-wrap gap-1 items-center">
-            <li><Link href={`/${locale}`} className="hover:text-blue-600">Home</Link></li>
-            <li className="mx-1">/</li>
-            <li className="text-gray-800 font-medium">How Much Paint for a Ceiling?</li>
+          <ol className="flex items-center gap-2">
+            <li><Link href={`/${locale}`} className="hover:text-blue-600 transition-colors">Home</Link></li>
+            <li className="text-gray-300">/</li>
+            <li className="text-gray-700 font-medium">How Much Paint for a Ceiling?</li>
           </ol>
         </nav>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How Much Paint for a Ceiling?</h1>
-        <p className="text-lg text-gray-600 mb-6">Ceilings are often overlooked in paint estimates. Because ceiling paint is applied differently to walls and typically requires two coats for full coverage, having the right amount on hand is essential.</p>
-
-        {/* Quick Answer Box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-6">
-          <h2 className="text-lg font-bold text-blue-800 mb-2">Quick Answer</h2>
-          <p className="text-blue-900" dangerouslySetInnerHTML={{ __html: `A standard 12x12 ceiling (144 sq ft) needs approximately <strong>0.5 gallon</strong> (1.9 litres) per coat. For two coats, budget <strong>1 gallon</strong> (3.8 litres).` }} />
+        <div className="text-center mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            How Much Paint for a Ceiling?
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: `A standard 12x12 ceiling needs approximately <strong>0.5 to 1 gallon</strong> (2 to 4 litres) for two coats. Enter your room dimensions below for an exact result.` }}
+          />
         </div>
 
-        {/* Tip Box */}
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
-          <p className="text-amber-800 text-sm"><strong>Pro Tip:</strong> Always use flat/matte white paint specifically formulated for ceilings. Standard ceiling paint hides roller marks better than wall paint applied overhead.</p>
+        <div className="bg-blue-600 text-white rounded-2xl p-6 mb-8 max-w-2xl mx-auto text-center">
+          <p className="text-sm font-semibold uppercase tracking-wider mb-2 opacity-80">Quick Answer</p>
+          <p className="text-2xl font-bold mb-1">0.5 to 1 gallon (2 to 4 litres)</p>
+          <p className="text-sm opacity-90">For a standard 12x12 ceiling — two coats of ceiling paint</p>
         </div>
 
-        {/* Calculator */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Paint Calculator</h2>
-          <Suspense fallback={<div className="h-64 bg-gray-100 rounded-lg animate-pulse" />}>
-            <PaintCalculatorClient locale={locale} />
-          </Suspense>
-        </div>
+        <Suspense fallback={
+          <div className="min-h-96 bg-white rounded-2xl flex items-center justify-center">
+            <p className="text-gray-500">Loading calculator...</p>
+          </div>
+        }>
+          <PaintCalculatorClient locale={locale} />
+        </Suspense>
 
-        {/* Reference Table */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Paint Quantity Reference</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse">
+        <article className="max-w-3xl mx-auto mt-16">
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">How Much Paint Does a Ceiling Need?</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">Ceiling paint coverage is straightforward to calculate — it is simply the floor area of the room. A 12x12 room has a 144 sq ft ceiling. At 400 sq ft per gallon, one gallon covers the ceiling for 2.7 coats — so one gallon is more than enough for two coats with some left over.</p>
+          <p className="text-gray-700 leading-relaxed mb-4">A large 20x20 room has a 400 sq ft ceiling — exactly one gallon per coat, meaning you need 2 gallons for two coats. Very large open-plan ceilings may need 3 or more gallons.</p>
+          <p className="text-gray-700 leading-relaxed mb-4">Textured ceilings (popcorn, knockdown) absorb 20 to 30% more paint than smooth ceilings. Always add a 25% buffer to your estimate for textured surfaces.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ceiling Paint — Reference Table by Room Size</h2>
+          <div className="overflow-x-auto mb-8">
+            <table className="w-full text-sm border-collapse border border-gray-200 rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-50 border-b-2 border-gray-200">
-                  <th className="text-left py-3 pr-4 font-semibold text-gray-700">Scenario</th>
-                  <th className="text-left py-3 pr-4 font-semibold text-gray-700">Gallons</th>
-                  <th className="text-left py-3 font-semibold text-gray-700">Litres</th>
+                <tr className="bg-blue-600 text-white">
+                  <th className="px-4 py-3 text-left font-semibold">Room Size</th><th className="px-4 py-3 text-left font-semibold">Ceiling Area</th><th className="px-4 py-3 text-left font-semibold">1 Coat</th><th className="px-4 py-3 text-left font-semibold">2 Coats</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">10x10 ceiling (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">0.5 gallon</td>
-                  <td className="py-2 text-gray-600">1.9 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">12x12 ceiling (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">1 gallon</td>
-                  <td className="py-2 text-gray-600">3.8 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">15x15 ceiling (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">1.2 gallons</td>
-                  <td className="py-2 text-gray-600">4.5 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">15x20 ceiling (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">1.5 gallons</td>
-                  <td className="py-2 text-gray-600">5.7 litres</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <td className="py-2 pr-4 text-gray-700">20x20 ceiling (2 coats)</td>
-                  <td className="py-2 pr-4 font-medium">2 gallons</td>
-                  <td className="py-2 text-gray-600">7.6 litres</td>
-                </tr>
+                <tr className={0 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">10x10</td><td className="px-4 py-3 text-gray-700">100 sq ft</td><td className="px-4 py-3 text-gray-700">~0.25 gal</td><td className="px-4 py-3 text-gray-700">~0.5 gal</td>
+                  </tr>
+                <tr className={1 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">12x12</td><td className="px-4 py-3 text-gray-700">144 sq ft</td><td className="px-4 py-3 text-gray-700">~0.36 gal</td><td className="px-4 py-3 text-gray-700">~0.72 gal</td>
+                  </tr>
+                <tr className={2 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">14x14</td><td className="px-4 py-3 text-gray-700">196 sq ft</td><td className="px-4 py-3 text-gray-700">~0.5 gal</td><td className="px-4 py-3 text-gray-700">~1 gal</td>
+                  </tr>
+                <tr className={3 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">15x20</td><td className="px-4 py-3 text-gray-700">300 sq ft</td><td className="px-4 py-3 text-gray-700">~0.75 gal</td><td className="px-4 py-3 text-gray-700">~1.5 gal</td>
+                  </tr>
+                <tr className={4 % 2 === 0 ? 'bg-white border-b border-gray-100' : 'bg-gray-50 border-b border-gray-100'}>
+                    <td className="px-4 py-3 font-medium text-gray-800">20x20</td><td className="px-4 py-3 text-gray-700">400 sq ft</td><td className="px-4 py-3 text-gray-700">~1 gal</td><td className="px-4 py-3 text-gray-700">~2 gal</td>
+                  </tr>
               </tbody>
             </table>
           </div>
-        </div>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Best Paint for Ceilings</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">Always use flat or matte white ceiling paint rather than standard wall paint applied overhead. Ceiling-specific paints are formulated to resist drips and spatters when applied overhead, dry without sheen, and hide roller marks and imperfections better than wall paint.</p>
+          <p className="text-gray-700 leading-relaxed mb-4">For bathrooms and kitchens, use a ceiling paint with a mould and mildew resistant formula. The extra moisture in these rooms can cause standard ceiling paint to bubble or grow mould over time.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Tips for Painting a Ceiling</h2>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Paint the ceiling before the walls</strong> — any drips or spatters on the walls will be covered when you paint the walls afterward.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Use an extension pole</strong> on your roller to avoid working off a ladder. It is faster, safer, and produces more even coverage.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Work in natural light or use bright work lights</strong> so you can see missed spots. Ceiling paint is notoriously easy to miss in patches.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Apply with a thick nap roller (3/4 inch)</strong> for textured ceilings. The extra nap works paint into the texture effectively.</p>
+          <p className="text-gray-700 leading-relaxed mb-2"><strong>Cut in carefully along the ceiling-wall joint</strong> with an angled brush before rolling. This is the hardest part of painting a ceiling cleanly.</p>
 
-        {/* FAQs */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <dl className="space-y-5">
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">1. How much ceiling paint do I need per gallon?</dt>
-              <dd className="text-gray-700 leading-relaxed">One gallon of ceiling paint covers approximately 350-400 sq ft per coat. For two coats, divide your ceiling area by 200 to get gallons needed.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">2. Do ceilings need two coats of paint?</dt>
-              <dd className="text-gray-700 leading-relaxed">Yes, two coats are recommended for even coverage and to hide roller stipple. Some white-on-white repaints may only need one coat.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">3. What is the best paint for ceilings?</dt>
-              <dd className="text-gray-700 leading-relaxed">Use flat or matte white ceiling paint. It dries without sheen, which hides imperfections and roller lines that would be visible with glossier finishes.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">4. Should I paint the ceiling before or after walls?</dt>
-              <dd className="text-gray-700 leading-relaxed">Always paint ceilings first. Any drips or spatters on the walls get covered when you paint the walls afterward.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">5. How much paint for a popcorn or textured ceiling?</dt>
-              <dd className="text-gray-700 leading-relaxed">Textured ceilings absorb 20-30% more paint. Add that amount to your estimate, or use a thick nap roller (3/4 inch) to work paint into the texture.</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900 mb-1">6. Can I use wall paint on the ceiling?</dt>
-              <dd className="text-gray-700 leading-relaxed">You can, but ceiling-specific paint is formulated to resist drips and splatter when applied overhead, making the job cleaner and easier.</dd>
-            </div>
-          </dl>
-        </div>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Paint Calculators</h2>
+          <ul className="space-y-2 mb-8">
+            <li><Link href={`/${locale}/ceiling-paint-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Ceiling Paint Calculator →</Link></li>
+            <li><Link href={`/${locale}/how-much-paint-for-a-12x12-room`} className="text-blue-600 hover:text-blue-700 font-medium">How Much Paint for a 12x12 Room? →</Link></li>
+            <li><Link href={`/${locale}/how-much-paint-for-a-bedroom`} className="text-blue-600 hover:text-blue-700 font-medium">How Much Paint for a Bedroom? →</Link></li>
+            <li><Link href={`/${locale}/textured-wall-paint-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Textured Wall Paint Calculator →</Link></li>
+            <li><Link href={`/${locale}/paint-coverage-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Paint Coverage Calculator →</Link></li>
+            <li><Link href={`/${locale}/two-coat-paint-calculator`} className="text-blue-600 hover:text-blue-700 font-medium">Two Coat Paint Calculator →</Link></li>
+            <li><Link href={`/${locale}`} className="text-blue-600 hover:text-blue-700 font-medium">Free Paint Calculator →</Link></li>
+          </ul>
 
-        {/* Related Links */}
-        <div className="border-t border-gray-200 pt-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Related Calculators and Guides</h2>
-          <div className="flex flex-wrap gap-3">
-              <Link href={`/${locale}/ceiling-paint-calculator`} className="text-blue-600 hover:underline text-sm">Ceiling Paint Calculator</Link>
-              <Link href={`/${locale}/how-much-paint-for-a-12x12-room`} className="text-blue-600 hover:underline text-sm">How Much Paint for a 12x12 Room?</Link>
-              <Link href={`/${locale}/textured-wall-paint-calculator`} className="text-blue-600 hover:underline text-sm">Textured Wall Paint Calculator</Link>
-              <Link href={`/${locale}/paint-coverage-calculator`} className="text-blue-600 hover:underline text-sm">Paint Coverage Calculator</Link>
+          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-8">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+
+            <div key="How much ceiling pai">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">How much ceiling paint do I need?</h3>
+              <p className="text-gray-700">One gallon of ceiling paint covers 350 to 400 sq ft per coat. For a standard 12x12 ceiling (144 sq ft), one gallon is more than enough for two coats.</p>
+            </div>
+            <div key="Do I need two coats ">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Do I need two coats of ceiling paint?</h3>
+              <p className="text-gray-700">Yes — two coats are recommended for even, uniform coverage. Some white-on-white repaints may look fine with one coat, but two coats always produces a more professional result.</p>
+            </div>
+            <div key="Can I use wall paint">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Can I use wall paint on the ceiling?</h3>
+              <p className="text-gray-700">You can, but ceiling-specific paint is formulated to resist drips when applied overhead and hides roller marks better. It is worth using the right product for the ceiling.</p>
+            </div>
+            <div key="How much paint for a">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">How much paint for a textured popcorn ceiling?</h3>
+              <p className="text-gray-700">Textured ceilings absorb 20 to 30% more paint. Add 25% to your standard estimate. Use a thick nap roller (3/4 inch) to work paint into the texture.</p>
+            </div>
+            <div key="Should I paint the c">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Should I paint the ceiling before or after the walls?</h3>
+              <p className="text-gray-700">Always paint the ceiling first. Any drips or spatters on the walls will be covered when you paint the walls afterward.</p>
+            </div>
+            <div key="What colour should I">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">What colour should I paint my ceiling?</h3>
+              <p className="text-gray-700">Flat white is the most common ceiling colour. Painting the ceiling the same colour as the walls creates a cocoon effect popular in dining rooms and bedrooms. A slightly lighter version of the wall colour is a good compromise.</p>
+            </div>
           </div>
-        </div>
+
+        </article>
       </div>
     </main>
   );
