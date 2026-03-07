@@ -41,24 +41,24 @@ export default function Header({ locale }: HeaderProps) {
     { label: 'Contractor Calculator', slug: 'paint-calculator-for-contractors' },
     { label: 'Commercial Calculator', slug: 'commercial-paint-calculator' },
     { label: 'Warehouse Calculator', slug: 'warehouse-paint-calculator' },
-    { label: 'Office Building', slug: 'office-paint-calculator' },
+    { label: 'Office Building', slug: 'office-building-paint-calculator' },
     { label: 'School Calculator', slug: 'school-paint-calculator' },
     { label: 'Hotel Calculator', slug: 'hotel-paint-calculator' },
   ];
 
   const guidesHowMuchPaint = [
-    { label: 'For a 10x10 Room', slug: 'how-much-paint-for-10x10-room' },
-    { label: 'For a 12x12 Room', slug: 'how-much-paint-for-12x12-room' },
-    { label: 'For a 12x14 Room', slug: 'how-much-paint-for-12x14-room' },
-    { label: 'For a 14x14 Room', slug: 'how-much-paint-for-14x14-room' },
-    { label: 'For a 15x15 Room', slug: 'how-much-paint-for-15x15-room' },
-    { label: 'For a Bedroom', slug: 'how-much-paint-for-bedroom' },
-    { label: 'For a Living Room', slug: 'how-much-paint-for-living-room' },
-    { label: 'For a 1000 sq ft House', slug: 'how-much-paint-for-1000-sq-ft-house' },
-    { label: 'For a 2000 sq ft House', slug: 'how-much-paint-for-2000-sq-ft-house' },
+    { label: 'For a 10x10 Room', slug: 'how-much-paint-for-a-10x10-room' },
+    { label: 'For a 12x12 Room', slug: 'how-much-paint-for-a-12x12-room' },
+    { label: 'For a 12x14 Room', slug: 'how-much-paint-for-a-12x14-room' },
+    { label: 'For a 14x14 Room', slug: 'how-much-paint-for-a-14x14-room' },
+    { label: 'For a 15x15 Room', slug: 'how-much-paint-for-a-15x15-room' },
+    { label: 'For a Bedroom', slug: 'how-much-paint-for-a-bedroom' },
+    { label: 'For a Living Room', slug: 'how-much-paint-for-a-living-room' },
+    { label: 'For a 1000 sq ft House', slug: 'how-much-paint-for-a-1000-sq-ft-house' },
+    { label: 'For a 2000 sq ft House', slug: 'how-much-paint-for-a-2000-sq-ft-house' },
     { label: 'For Kitchen Cabinets', slug: 'how-much-paint-for-kitchen-cabinets' },
-    { label: 'For a Front Door', slug: 'how-much-paint-for-front-door' },
-    { label: 'For a Fence', slug: 'how-much-paint-for-fence' },
+    { label: 'For a Front Door', slug: 'how-much-paint-for-a-front-door' },
+    { label: 'For a Fence', slug: 'how-much-paint-for-a-fence' },
   ];
 
   const guidesHowTo = [
