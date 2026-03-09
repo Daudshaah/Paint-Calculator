@@ -89,7 +89,7 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header locale={locale} />
+        <Header />
         <script
           type="application/ld+json"
           suppressHydrationWarning
