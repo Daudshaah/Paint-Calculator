@@ -1,185 +1,155 @@
 import Link from 'next/link';
-import { getTranslations } from '@/i18n';
-import { Locale } from '@/i18n/config';
+import {
+  footerCalculators,
+  footerHowMuch,
+  footerCostGuides,
+  footerGuides,
+  footerLocations,
+} from '@/lib/site-pages';
 
-interface FooterProps {
-  locale: Locale;
+interface Props {
+  locale: string;
 }
 
-export default function Footer({ locale }: FooterProps) {
-  const t = getTranslations(locale);
-  const currentYear = new Date().getFullYear();
-
-  const makeHref = (slug: string) => `/${locale}/${slug}`;
-
-  const calculators = [
-    { label: 'Bedroom Calculator', slug: 'bedroom-paint-calculator' },
-    { label: 'Bathroom Calculator', slug: 'bathroom-paint-calculator' },
-    { label: 'Kitchen Calculator', slug: 'kitchen-paint-calculator' },
-    { label: 'Exterior Calculator', slug: 'exterior-paint-calculator' },
-    { label: 'Whole House Calculator', slug: 'whole-house-paint-calculator' },
-    { label: 'Primer Calculator', slug: 'primer-calculator' },
-    { label: 'Paint Cost Calculator', slug: 'paint-cost-calculator' },
-  ];
-
-  const guides = [
-    { label: 'How Much Paint 10x10', slug: 'how-much-paint-for-10x10-room' },
-    { label: 'How Much Paint Bedroom', slug: 'how-much-paint-for-bedroom' },
-    { label: 'How Many Coats', slug: 'how-many-coats-of-paint' },
-    { label: 'Do I Need Primer', slug: 'do-i-need-primer-before-painting' },
-    { label: 'Cost to Paint a Room', slug: 'how-much-does-it-cost-to-paint-a-room' },
-    { label: 'Paint Finish Guide', slug: 'paint-finish-guide' },
-  ];
-
-  const blog = [
-    { label: 'Best Paint Brands', slug: 'blog/best-paint-brands' },
-    { label: 'Paint Finish Guide', slug: 'blog/paint-finish-guide' },
-    { label: 'Bedroom Color Ideas', slug: 'blog/bedroom-paint-color-ideas' },
-    { label: 'How to Prep Walls', slug: 'blog/how-to-prep-walls-for-painting' },
-    { label: 'Exterior Color Trends', slug: 'blog/exterior-paint-color-trends' },
-    { label: 'DIY Painting Guides', slug: 'blog/category/diy' },
-  ];
-
-  const company = [
-    { label: 'About Us', slug: 'about' },
-    { label: 'How It Works', slug: 'how-it-works' },
-    { label: 'Help', slug: 'help' },
-    { label: 'FAQ', slug: 'faq' },
-    { label: 'Write for Us', slug: 'write-for-us' },
-    { label: 'Contact Us', slug: 'contact' },
-    { label: 'Privacy Policy', slug: 'privacy' },
-    { label: 'Terms of Service', slug: 'terms' },
-  ];
-
-  const locations = [
-    { label: 'Texas', slug: 'paint-calculator-texas' },
-    { label: 'California', slug: 'paint-calculator-california' },
-    { label: 'Florida', slug: 'paint-calculator-florida' },
-    { label: 'New York', slug: 'paint-calculator-new-york' },
-    { label: 'Georgia', slug: 'paint-calculator-georgia' },
-    { label: 'Arizona', slug: 'paint-calculator-arizona' },
-    { label: 'Illinois', slug: 'paint-calculator-illinois' },
-    { label: 'Ohio', slug: 'paint-calculator-ohio' },
-  ];
+export default function Footer({ locale }: Props) {
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-gray-200 mt-12">
-      <div className="max-w-7xl mx-auto px-4 py-10 space-y-8">
+    <footer className="bg-gray-900 text-gray-300">
 
-        {/* About section — full width on top */}
-        <div className="pb-6 border-b border-gray-100">
-          <div className="max-w-xl">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              {t.footer.aboutTitle}
-            </h3>
-            <p className="text-sm text-gray-600 mb-3">
-              {t.footer.aboutText}
-            </p>
-            <div className="flex items-center gap-3 text-sm text-gray-500">
-              <span>{t.footer.supportEmail}</span>
-              <span className="h-1 w-1 rounded-full bg-gray-300" />
-              <span>{t.footer.available}</span>
-            </div>
-          </div>
-        </div>
+      {/* Main footer grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 
-        {/* 4 column grid — Calculators, Guides, Blog, Company */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-
-          {/* Calculators */}
+          {/* Col 1: Calculators */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
               Calculators
             </h3>
-            <ul className="space-y-1.5 text-sm text-gray-600">
-              {calculators.map((item) => (
-                <li key={item.slug}>
+            <ul className="space-y-2">
+              {footerCalculators.map((p) => (
+                <li key={p.slug}>
                   <Link
-                    href={makeHref(item.slug)}
-                    className="hover:text-blue-600 transition-colors"
+                    href={`/${locale}/${p.slug}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    {item.label}
+                    {p.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
+              <li>
                 <Link
-                  href={`/${locale}`}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
+                  href={`/${locale}/calculators`}
+                  className="text-sm text-blue-400 hover:text-blue-300 font-medium"
                 >
-                  View All →
+                  View all calculators →
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Guides */}
+          {/* Col 2: How Much Paint */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
-              Guides
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+              How Much Paint
             </h3>
-            <ul className="space-y-1.5 text-sm text-gray-600">
-              {guides.map((item) => (
-                <li key={item.slug}>
+            <ul className="space-y-2">
+              {footerHowMuch.map((p) => (
+                <li key={p.slug}>
                   <Link
-                    href={makeHref(item.slug)}
-                    className="hover:text-blue-600 transition-colors"
+                    href={`/${locale}/${p.slug}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    {item.label}
+                    {p.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
+              <li>
                 <Link
-                  href={makeHref('how-it-works')}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
+                  href={`/${locale}/how-much-paint`}
+                  className="text-sm text-blue-400 hover:text-blue-300 font-medium"
                 >
-                  View All →
+                  View all →
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Blog */}
+          {/* Col 3: Cost Guides */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
-              Blog
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+              Cost Guides
             </h3>
-            <ul className="space-y-1.5 text-sm text-gray-600">
-              {blog.map((item) => (
-                <li key={item.slug}>
+            <ul className="space-y-2">
+              {footerCostGuides.map((p) => (
+                <li key={p.slug}>
                   <Link
-                    href={makeHref(item.slug)}
-                    className="hover:text-blue-600 transition-colors"
+                    href={`/${locale}/${p.slug}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    {item.label}
+                    {p.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
+              <li>
                 <Link
-                  href={makeHref('blog')}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
+                  href={`/${locale}/cost-guides`}
+                  className="text-sm text-blue-400 hover:text-blue-300 font-medium"
                 >
-                  View All Posts →
+                  View all cost guides →
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Col 4: Painting Guides */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+              Painting Guides
+            </h3>
+            <ul className="space-y-2">
+              {footerGuides.map((p) => (
+                <li key={p.slug}>
+                  <Link
+                    href={`/${locale}/${p.slug}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href={`/${locale}/painting-guides`}
+                  className="text-sm text-blue-400 hover:text-blue-300 font-medium"
+                >
+                  View all guides →
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 5: Company */}
+          <div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
               Company
             </h3>
-            <ul className="space-y-1.5 text-sm text-gray-600">
-              {company.map((item) => (
-                <li key={item.slug}>
+            <ul className="space-y-2">
+              {[
+                { label: 'How It Works', slug: 'how-it-works' },
+                { label: 'FAQ', slug: 'faq' },
+                { label: 'Tips & Tricks', slug: 'tips-and-tricks' },
+                { label: 'Write for Us', slug: 'write-for-us' },
+                { label: 'Contact Us', slug: 'contact' },
+                { label: 'Privacy Policy', slug: 'privacy' },
+                { label: 'Terms of Service', slug: 'terms' },
+              ].map((p) => (
+                <li key={p.slug}>
                   <Link
-                    href={makeHref(item.slug)}
-                    className="hover:text-blue-600 transition-colors"
+                    href={`/${locale}/${p.slug}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    {item.label}
+                    {p.label}
                   </Link>
                 </li>
               ))}
@@ -187,52 +157,50 @@ export default function Footer({ locale }: FooterProps) {
           </div>
 
         </div>
+      </div>
 
-        {/* Location strip */}
-        <div className="border-t border-gray-200 pt-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
-            <span className="font-medium text-gray-600">Popular locations:</span>
-            {locations.map((loc, idx) => (
-              <span key={loc.slug} className="flex items-center gap-2">
-                {idx > 0 && <span className="text-gray-300">|</span>}
-                <Link
-                  href={makeHref(loc.slug)}
-                  className="hover:text-blue-600"
-                >
-                  {loc.label}
-                </Link>
-              </span>
+      {/* Locations strip */}
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <p className="text-xs text-gray-500 mb-3 uppercase tracking-wider font-semibold">
+            Popular Locations
+          </p>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {footerLocations.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/${locale}/${p.slug}`}
+                className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                {p.label}
+              </Link>
             ))}
-            <span className="text-gray-300">|</span>
-            <Link href={`/${locale}`} className="hover:text-blue-600">
-              View All States →
+            <Link
+              href={`/${locale}/locations`}
+              className="text-sm text-blue-400 hover:text-blue-300 font-medium"
+            >
+              All locations →
             </Link>
           </div>
         </div>
+      </div>
 
-        {/* Copyright bar */}
-        <div className="border-t border-gray-200 pt-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-500">
-            <p>
-              {t.footer.copyright.replace('{year}', currentYear.toString())}
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link href={makeHref('privacy')} className="hover:text-blue-600">
-                Privacy Policy
-              </Link>
-              <span className="text-gray-300">|</span>
-              <Link href={makeHref('write-for-us')} className="hover:text-blue-600">
-                Write for Us
-              </Link>
-              <span className="text-gray-300">|</span>
-              <Link href={makeHref('terms')} className="hover:text-blue-600">
-                Terms of Service
-              </Link>
-            </div>
+      {/* Copyright bar */}
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-xs text-gray-600">
+            © {year} ThePaintCalculator.com · All rights reserved
+          </p>
+          <div className="flex items-center gap-4 text-xs text-gray-600">
+            <Link href={`/${locale}/privacy`} className="hover:text-gray-400">Privacy</Link>
+            <Link href={`/${locale}/terms`} className="hover:text-gray-400">Terms</Link>
+            <Link href={locale === 'en' ? '/es' : '/en'} className="hover:text-gray-400">
+              {locale === 'en' ? 'Español' : 'English'}
+            </Link>
           </div>
         </div>
-
       </div>
+
     </footer>
   );
 }
