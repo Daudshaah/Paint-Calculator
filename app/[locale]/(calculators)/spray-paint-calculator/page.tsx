@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import PaintCalculatorClient from '../PaintCalculatorClient';
+import PaintCalculatorClient from '../../PaintCalculatorClient';
 import { Locale, locales, defaultLocale } from '@/i18n/config';
 
 function isValidLocale(locale: string): locale is Locale {

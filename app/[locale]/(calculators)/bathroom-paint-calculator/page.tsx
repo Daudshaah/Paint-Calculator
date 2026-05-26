@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import PaintCalculatorClient from '../PaintCalculatorClient';
+import PaintCalculatorClient from '../../PaintCalculatorClient';
 
 const BATHROOM_STATE = {
   activeTab: 'interior',
